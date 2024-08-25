@@ -1,22 +1,18 @@
 import Button from '@src/components/Button';
 import LETTERS, {Letter} from '@src/constants/letters';
 import x from '@src/constants/x';
+import {RootStacksProp} from '@src/screens';
 import {useStore} from '@src/stores';
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-interface MyProps {}
+interface MyProps {
+  navigation?: RootStacksProp;
+}
 
 const HomeLetters: React.FC<MyProps> = props => {
-  const {} = props;
+  const {navigation} = props;
   const {theme} = useStore();
   const [letters, setLetters] = useState<Letter[]>([]);
   const [index, setIndex] = useState(0);
@@ -73,30 +69,36 @@ const HomeLetters: React.FC<MyProps> = props => {
             <TouchableOpacity
               activeOpacity={x.Touchable.OPACITY}
               key={i}
-              style={{
-                width: ((x.WIDTH - 24) * 0.6) / 5,
-                alignItems: 'center',
-                borderWidth: 1,
-                borderRadius: 12,
-                borderColor: index == i ? theme : 'white',
-              }}
+              style={[
+                styles.letterContainer,
+                {
+                  borderColor: index == i ? theme : 'white',
+                },
+              ]}
               onPress={() => setIndex(it == null ? index : i)}>
               {it ? (
                 <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-                  <Image
-                    source={{uri: it.hiragana.src}}
-                    style={[
-                      {
-                        width: x.scale(42),
-                        height: x.scale(49),
-                      },
-                      isRecite
-                        ? {tintColor: '#eee'}
-                        : index == i
-                        ? {}
-                        : {tintColor: '#666'},
-                    ]}
-                  />
+                  {isRecite ? (
+                    <Text
+                      style={{
+                        fontWeight: '500',
+                        color: '#333',
+                        fontSize: x.scale(24),
+                      }}>
+                      {it.hiragana.letter}
+                    </Text>
+                  ) : (
+                    <Image
+                      source={{uri: it.hiragana.src}}
+                      style={[
+                        {
+                          width: x.scale(42),
+                          height: x.scale(49),
+                        },
+                        index == i ? {} : {tintColor: '#666'},
+                      ]}
+                    />
+                  )}
                 </View>
               ) : null}
             </TouchableOpacity>
@@ -148,7 +150,13 @@ const HomeLetters: React.FC<MyProps> = props => {
               onPress={() => setIsPreview(!isPreview)}
             />
             <View style={{height: 12}} />
-            <FillButton title={'默写大PK'} onPress={() => {}} theme={theme} />
+            <FillButton
+              title={'默写大PK'}
+              onPress={() => {
+                navigation.navigate('WriteLetters');
+              }}
+              theme={theme}
+            />
           </View>
         </View>
       </View>
@@ -208,6 +216,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     backgroundColor: '#fff',
     borderRadius: 12,
+  },
+  letterContainer: {
+    width: ((x.WIDTH - 24) * 0.6) / 5,
+    height: (((x.WIDTH - 24) * 0.6) / 5 / 6) * 7,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 12,
+    justifyContent: 'center',
   },
 });
 

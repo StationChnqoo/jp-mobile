@@ -32,6 +32,15 @@ const Color = {
   PAGE: '#f0f0f0',
 };
 
+const Time = {
+  HHmmss: (seconds: number) => {
+    let h = Math.floor(seconds / 60 / 60);
+    let m = Math.floor((seconds / 60) % 60);
+    let s = Math.floor(seconds % 60);
+    const withZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+    return `${withZero(m)}:${withZero(s)}`;
+  },
+};
 const Styles = {
   FILL: <ImageStyle | ViewStyle | any>{
     position: 'absolute',
@@ -76,6 +85,7 @@ const x = {
   Fonts,
   Color,
   Styles,
+  Time
 };
 
 export default x;

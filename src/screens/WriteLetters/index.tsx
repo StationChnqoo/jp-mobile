@@ -1,15 +1,36 @@
+import SafeArea from '@src/components/SafeArea';
+import ToolBar from '@src/components/ToolBar';
 import LETTERS, {Letter} from '@src/constants/letters';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {RootStacksProp} from '..';
+import Score from './components/Score';
+import Play from './components/Play';
+import {useInterval} from 'ahooks';
 
-interface MyProps {}
+interface MyProps {
+  navigation?: RootStacksProp;
+}
 
 const WriteLetters: React.FC<MyProps> = props => {
-  const {} = props;
+  const {navigation} = props;
   const {theme} = useStore();
   const [letters, setLetters] = useState<Letter[]>([]);
+  const [status, setStatus] = useState(0);
+  const [interval, setInterval] = useState<null | undefined | number>(
+    undefined,
+  );
+  const [seconds, setSeconds] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     let _letters = [...LETTERS.slice(0, 46)];
@@ -25,57 +46,54 @@ const WriteLetters: React.FC<MyProps> = props => {
     }
     return _letters;
   };
+
+  useInterval(() => {
+    setSeconds(t => t + 1);
+  }, interval);
+
+  useEffect(() => {
+    return function () {
+      setInterval(undefined);
+    };
+  }, []);
+
   return (
-    <View style={styles.view}>
-      <View
-        style={[x.Styles.rowCenter('space-between'), {paddingHorizontal: 12}]}>
-        <Text
-          style={{
-            fontSize: x.scale(16),
-            fontWeight: '500',
-          }}>
-          五十音图
-        </Text>
-        <TouchableOpacity
-          activeOpacity={x.Touchable.OPACITY}
-          onPress={() => {}}>
-          <Text style={{fontSize: x.scale(14), color: theme}}>练习 →</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{height: 6}} />
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          width: x.WIDTH * 0.6,
-        }}>
-        {letters.map((it, i) => (
-          <TouchableOpacity
-            activeOpacity={x.Touchable.OPACITY}
-            key={i}
-            style={{width: (x.WIDTH - 24) / 5, alignItems: 'center'}}>
-            {it ? (
-              <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-                <Image
-                  source={{uri: it.hiragana.src}}
-                  style={{width: 48, height: 56}}
-                />
-              </View>
-            ) : null}
-          </TouchableOpacity>
-        ))}
-      </View>
-    </View>
+    <SafeArea>
+      <ToolBar
+        title={'五十音默写大PK'}
+        onBackPress={() => {
+          navigation.goBack();
+        }}
+      />
+      <ScrollView>
+        <View style={styles.view}>
+          <Score />
+          <View style={{height: 12}} />
+          <Play
+            seconds={seconds}
+            playing={playing}
+            onPlayPress={() => {
+              if (playing) {
+                setPlaying(false);
+                setInterval(undefined);
+              } else {
+                setSeconds(0);
+                setInterval(1000);
+                setPlaying(true);
+              }
+            }}
+          />
+        </View>
+      </ScrollView>
+    </SafeArea>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
+    flex: 1,
     paddingVertical: 12,
-    marginHorizontal: 12,
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    backgroundColor: x.Color.PAGE,
   },
 });
 

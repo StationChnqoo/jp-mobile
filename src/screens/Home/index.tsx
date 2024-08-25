@@ -1,21 +1,19 @@
-import type {PropsWithChildren} from 'react';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import SafeArea from '@src/components/SafeArea';
 import {RootStacksProp} from '..';
 import Banner from './components/Banner';
-import DoingOrders from './components/DoingOrders';
 import HomeLetters from './components/Letters';
 import SuggestTips from './components/SuggestTips';
 import Toolbar from './components/Toolbar';
-import SafeArea from '@src/components/SafeArea';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
 const Home: React.FC<MyProps> = props => {
+  const {navigation} = props;
   return (
     <SafeArea>
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
@@ -24,7 +22,7 @@ const Home: React.FC<MyProps> = props => {
           <View style={{height: 12}} />
           {[
             <Banner />,
-            <HomeLetters />,
+            <HomeLetters navigation={navigation} />,
             <SuggestTips onClosePress={() => {}} />,
           ].map((it, i) => (
             <View key={i} style={{marginBottom: 12}}>

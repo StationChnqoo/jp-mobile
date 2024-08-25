@@ -1,3 +1,4 @@
+import x from '@src/constants/x';
 import {RootStacksProp} from '@src/screens';
 import React from 'react';
 import {
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -21,8 +21,8 @@ const IMAGE_SIZE = 16;
 const ToolBar: React.FC<MyProps> = props => {
   const {title, onBackPress} = props;
   return (
-    <View>
-      <View style={styles.views}>
+    <View style={x.Styles.CARD}>
+      <View style={[styles.views]}>
         <TouchableOpacity
           activeOpacity={0.9}
           hitSlop={{
