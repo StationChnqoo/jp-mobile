@@ -6,7 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
 import Banner from './components/Banner';
 import DoingOrders from './components/DoingOrders';
-import MarketOrders from './components/MarketOrders';
+import HomeLetters from './components/Letters';
 import SuggestTips from './components/SuggestTips';
 import Toolbar from './components/Toolbar';
 import SafeArea from '@src/components/SafeArea';
@@ -24,8 +24,7 @@ const HomeScreen: React.FC<MyProps> = props => {
           <View style={{height: 12}} />
           {[
             <Banner />,
-            <DoingOrders />,
-            <MarketOrders />,
+            <HomeLetters />,
             <SuggestTips onClosePress={() => {}} />,
           ].map((it, i) => (
             <View key={i} style={{marginBottom: 12}}>
