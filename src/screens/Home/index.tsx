@@ -15,7 +15,7 @@ interface MyProps {
   navigation?: RootStacksProp;
 }
 
-const HomeScreen: React.FC<MyProps> = props => {
+const Home: React.FC<MyProps> = props => {
   return (
     <SafeArea>
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Home;

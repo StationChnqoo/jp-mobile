@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import React from 'react';
 import {Image} from 'react-native';
-import HomeScreen from '../Home';
+import Home from '../Home';
 import MarketScreen from '../Market';
 import {useStore} from '@src/stores';
 import OrdersScreen from '../Orders';
@@ -14,7 +14,7 @@ function MainScreen() {
   const screens = [
     {
       name: 'Home',
-      component: HomeScreen,
+      component: Home,
       icon: require('./assets/menu_home.png'),
       label: '首页',
     },
@@ -32,7 +32,7 @@ function MainScreen() {
     },
     {
       name: 'Friends',
-      component: HomeScreen,
+      component: Home,
       icon: require('./assets/menu_friends.png'),
       label: '社区',
     },
