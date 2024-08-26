@@ -1,6 +1,6 @@
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {}

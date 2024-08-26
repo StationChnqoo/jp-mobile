@@ -2,9 +2,10 @@ import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import LETTERS, {Letter} from '@src/constants/letters';
 import ClickPanel from '../ClickPanel';
 import PreviewPanel from '../PreviewPanel';
+import {Letter} from '@src/constants/Types';
+import Services from '@src/constants/Services';
 const SPACE = [36, 38, 46, 48];
 
 interface MyProps {
@@ -17,25 +18,56 @@ const Play: React.FC<MyProps> = props => {
   const {playing, seconds, onPlayPress} = props;
   const {theme} = useStore();
   const [index, setIndex] = useState(0);
-  const [letters, setLetters] = useState(Array(50).fill(''));
-  const [r, setR] = useState(0);
+  const [clickLetters, setClickLetters] = useState<Letter[]>([]);
+  const [previewLetters, setPreviewLetters] = useState<string[]>(
+    Array(50).fill(''),
+  );
+
+  useEffect(() => {
+    (async () => {
+      let datas = await loadJPLetters();
+      setClickLetters(lettersFormatter(datas.slice(0, 46)));
+    })();
+    return function () {};
+  }, []);
+
+  const lettersFormatter = (letters: any[]) => {
+    let _letters = [...letters];
+    let space = [36, 38, 46, 48];
+    for (let i = 0; i < space.length; i++) {
+      _letters.splice(space[i], 0, null);
+    }
+    return _letters;
+  };
+
+  const loadJPLetters = async () => {
+    return await new Services().selectJPLetters();
+  };
 
   const onSmallLetterPress = (i: number) => {
-    if (SPACE.includes(i)) {
-    } else {
-      setIndex(i);
-      if (letters[i]) {
-        let _letters = [...letters];
-        _letters[i] = '';
-        setLetters(_letters);
+    if (playing) {
+      if (SPACE.includes(i)) {
+      } else {
+        setIndex(i);
+        if (previewLetters[i]) {
+          let _letters = [...previewLetters];
+          _letters[i] = '';
+          setPreviewLetters(_letters);
+        }
       }
+    } else {
+      console.log('请开始开始PK ~');
     }
   };
 
   const onBigLetterPress = (letter: Letter) => {
-    let _letters = [...letters];
-    _letters[index] = letter.hiragana.letter;
-    setLetters(_letters);
+    if (playing) {
+      let _letters = [...previewLetters];
+      _letters[index] = letter.hiragana.letter;
+      setPreviewLetters(_letters);
+    } else {
+      console.log('请开始开始PK ~');
+    }
   };
 
   return (
@@ -44,9 +76,9 @@ const Play: React.FC<MyProps> = props => {
         <View style={{flex: 6}}>
           <ClickPanel
             onPress={onBigLetterPress}
-            letterChars={letters}
-            r={r}
+            letterChars={previewLetters}
             playing={playing}
+            letters={clickLetters}
           />
         </View>
         <View style={styles.line} />
@@ -54,7 +86,7 @@ const Play: React.FC<MyProps> = props => {
           <Text style={{fontSize: x.scale(16), color: '#333'}}>预览</Text>
           <View style={{height: 5}} />
           <PreviewPanel
-            letters={letters}
+            letters={previewLetters}
             index={index}
             playing={playing}
             onPress={onSmallLetterPress}

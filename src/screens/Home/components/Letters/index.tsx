@@ -1,5 +1,7 @@
 import Button from '@src/components/Button';
-import LETTERS, {Letter} from '@src/constants/letters';
+import Services from '@src/constants/Services';
+import {Letter} from '@src/constants/Types';
+
 import x from '@src/constants/x';
 import {RootStacksProp} from '@src/screens';
 import {useStore} from '@src/stores';
@@ -16,20 +18,26 @@ const HomeLetters: React.FC<MyProps> = props => {
   const {theme} = useStore();
   const [letters, setLetters] = useState<Letter[]>([]);
   const [index, setIndex] = useState(0);
-  const INIT_LETTERS = [...LETTERS.slice(0, 46)];
   const [isShuffle, setIsShuffle] = useState(false);
   const [isPreview, setIsPreview] = useState(true);
   const [isRecite, setIsRecite] = useState(false);
 
   useEffect(() => {
-    setIndex(0);
-    let initLetters = lettersFormatter(INIT_LETTERS);
-    let shuffleLetters = lettersFormatter(
-      [...INIT_LETTERS].sort((a, b) => Math.random() - 0.5),
-    );
-    setLetters(isShuffle ? shuffleLetters : initLetters);
+    (async () => {
+      setIndex(0);
+      let datas: Letter[] = await loadJPLetters();
+      let initLetters = lettersFormatter(datas.slice(0, 46));
+      let shuffleLetters = lettersFormatter(
+        [...datas.slice(0, 46)].sort((a, b) => Math.random() - 0.5),
+      );
+      setLetters(isShuffle ? shuffleLetters : initLetters);
+    })();
     return function () {};
   }, [isShuffle]);
+  
+  const loadJPLetters = async () => {
+    return await new Services().selectJPLetters();
+  };
 
   const lettersFormatter = (letters: any[]) => {
     let _letters = [...letters];

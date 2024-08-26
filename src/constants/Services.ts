@@ -40,4 +40,10 @@ export default class Services {
     let result = await this.instance.get(`/wallpaper-database/${date}.json`);
     return result.data;
   }
+
+  async selectJPLetters() {
+    this.instance.defaults.baseURL = 'https://cloud.cctv3.net';
+    let result = await this.instance.get('/jp-mobile/letters.json');
+    return result.data;
+  }
 }
