@@ -3,10 +3,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image} from 'react-native';
 import Home from '../Home';
-import MarketScreen from '../Market';
+import MarketScreen from '../Courses';
 import {useStore} from '@src/stores';
 import OrdersScreen from '../Orders';
 import MyScreen from '../My';
+import Courses from '../Courses';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,10 +20,10 @@ function MainScreen() {
       label: '首页',
     },
     {
-      name: 'Hot',
-      component: MarketScreen,
-      icon: require('./assets/menu_fire.png'),
-      label: '热门',
+      name: 'Courses',
+      component: Courses,
+      icon: require('./assets/menu_course.png'),
+      label: '课程',
     },
     {
       name: 'Order',

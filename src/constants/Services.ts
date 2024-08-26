@@ -46,4 +46,10 @@ export default class Services {
     let result = await this.instance.get('/jp-mobile/letters.json');
     return result.data;
   }
+
+  async selectJPCourses() {
+    this.instance.defaults.baseURL = 'https://cloud.cctv3.net';
+    let result = await this.instance.get('/jp-mobile/course.json');
+    return result.data;
+  }
 }
