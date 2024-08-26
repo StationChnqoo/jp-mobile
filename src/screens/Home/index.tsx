@@ -6,7 +6,6 @@ import {RootStacksProp} from '..';
 import Banner from './components/Banner';
 import HomeLetters from './components/Letters';
 import SuggestTips from './components/SuggestTips';
-import Toolbar from './components/Toolbar';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -17,7 +16,7 @@ const Home: React.FC<MyProps> = props => {
   return (
     <SafeArea>
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
-        <Toolbar onSearchPress={() => {}} onMessagePress={() => {}} />
+        {/* <Toolbar onSearchPress={() => {}} onMessagePress={() => {}} /> */}
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={{height: 12}} />
           {[

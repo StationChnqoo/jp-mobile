@@ -26,16 +26,16 @@ function MainScreen() {
       label: '课程',
     },
     {
-      name: 'Order',
+      name: 'Words',
       component: OrdersScreen,
-      icon: require('./assets/menu_order.png'),
-      label: '订单',
+      icon: require('./assets/menu_translate.png'),
+      label: '单词',
     },
     {
-      name: 'Friends',
+      name: 'Exam',
       component: Home,
-      icon: require('./assets/menu_friends.png'),
-      label: '社区',
+      icon: require('./assets/menu_exam.png'),
+      label: '考试',
     },
     {
       name: 'Me',
