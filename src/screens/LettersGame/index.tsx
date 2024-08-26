@@ -21,7 +21,7 @@ interface MyProps {
   navigation?: RootStacksProp;
 }
 
-const WriteLetters: React.FC<MyProps> = props => {
+const LettersGame: React.FC<MyProps> = props => {
   const {navigation} = props;
   const {theme} = useStore();
   const [letters, setLetters] = useState<Letter[]>([]);
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WriteLetters;
+export default LettersGame;

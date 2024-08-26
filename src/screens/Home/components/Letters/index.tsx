@@ -153,7 +153,7 @@ const HomeLetters: React.FC<MyProps> = props => {
             <FillButton
               title={'默写大PK'}
               onPress={() => {
-                navigation.navigate('WriteLetters');
+                navigation.navigate('LettersGame');
               }}
               theme={theme}
             />

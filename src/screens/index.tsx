@@ -10,11 +10,11 @@ import {
 import * as React from 'react';
 
 import Main from './Main';
-import WriteLetters from './WriteLetters';
+import LettersGame from './LettersGame';
 
 export type RootStacksParams = {
   Main: undefined;
-  WriteLetters: undefined;
+  LettersGame: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStacksParams>();
@@ -33,7 +33,11 @@ export default function Stacks() {
           animationDuration: 618,
         }}>
         <RootStack.Screen name="Main" component={Main} />
-        <RootStack.Screen name="WriteLetters" component={WriteLetters} />
+        <RootStack.Screen
+          name="LettersGame"
+          component={LettersGame}
+          options={{freezeOnBlur: true}}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
