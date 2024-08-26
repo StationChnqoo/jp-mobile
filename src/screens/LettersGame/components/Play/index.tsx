@@ -53,6 +53,7 @@ const Play: React.FC<MyProps> = props => {
           let _letters = [...previewLetters];
           _letters[i] = '';
           setPreviewLetters(_letters);
+          updateClickLettersByPreviewLetters(_letters);
         }
       }
     } else {
@@ -60,10 +61,25 @@ const Play: React.FC<MyProps> = props => {
     }
   };
 
+  const updateClickLettersByPreviewLetters = (letters: string[]) => {
+    // console.log('updateClickLettersByPreviewLetters: ', letters);
+    let _letters = [...clickLetters];
+    for (let i = 0; i < _letters.length; i++) {
+      let l = _letters[i];
+      if (_letters[i]) {
+        l.checked = letters.find(it => it && l && it == l.hiragana.letter)
+          ? true
+          : false;
+      }
+    }
+    setClickLetters(_letters);
+  };
+
   const onBigLetterPress = (letter: Letter) => {
     if (playing) {
       let _letters = [...previewLetters];
       _letters[index] = letter.hiragana.letter;
+      updateClickLettersByPreviewLetters(_letters);
       setPreviewLetters(_letters);
     } else {
       console.log('请开始开始PK ~');
