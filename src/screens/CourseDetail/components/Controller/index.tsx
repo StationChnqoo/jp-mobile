@@ -54,13 +54,13 @@ const Controller: React.FC<MyProps> = props => {
           <Image
             source={
               playing
-                ? require('@root/assets/play/stop.png')
+                ? require('@root/assets/play/pause.png')
                 : require('@root/assets/play/start.png')
             }
             style={{
               height: x.scale(24),
               width: x.scale(24),
-              tintColor: duration == 0 ? '#ccc' : theme,
+              tintColor: duration == 0 || downloading ? '#ccc' : theme,
             }}
           />
         </TouchableOpacity>

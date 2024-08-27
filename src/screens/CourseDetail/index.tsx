@@ -4,12 +4,13 @@ import ToolBar from '@src/components/ToolBar';
 import {RouteProp} from '@react-navigation/native';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
+import {useInterval} from 'ahooks';
 import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
-import {RootStacksParams, RootStacksProp} from '..';
-import Controller from './components/Controller';
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-sound';
+import {RootStacksParams, RootStacksProp} from '..';
+import Controller from './components/Controller';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -23,27 +24,49 @@ const CourseDetail: React.FC<MyProps> = props => {
   const [progress, setProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  var sound: Sound = null;
+  const [interval, setInterval] = useState<null | undefined | number>(
+    undefined,
+  );
+
+  useInterval(() => {
+    if (sound && sound.isPlaying()) {
+      sound.getCurrentTime(s => {
+        setProgress(s);
+      });
+    }
+  }, interval);
+
+  const [sound, setSound] = useState<Sound>(null);
 
   const onPlayPress = () => {
     console.log(playing);
     if (playing) {
       setPlaying(false);
-      sound?.stop();
+      sound.pause();
     } else {
       setPlaying(true);
-      sound?.play();
+      sound.play();
     }
   };
-  const onSeek = (n: number) => {};
+
+  const onSeek = (n: number) => {
+    setProgress(n);
+    sound.setCurrentTime(n);
+  };
 
   const initSoundSource = (file: string) => {
-    sound = new Sound(file, '', error => {
-      if (error) {
-        console.log('Sound init faild: ', error);
-      }
-      setProgress(0);
-      setDuration(sound.getDuration());
+    setSound(() => {
+      let _sound = new Sound(file, '', error => {
+        if (error) {
+          console.log('Sound init faild: ', error);
+        }
+        setProgress(0);
+        setDuration(_sound.getDuration());
+        setInterval(1000);
+        setPlaying(true);
+        _sound.play();
+      });
+      return _sound;
     });
   };
 
@@ -54,7 +77,6 @@ const CourseDetail: React.FC<MyProps> = props => {
       console.log('File path: ', file);
       let isFile = await RNFS.exists(file);
       if (isFile) {
-        console.log(file);
         initSoundSource(file);
       } else {
         RNFS.downloadFile({
@@ -83,10 +105,11 @@ const CourseDetail: React.FC<MyProps> = props => {
       }
     })();
     return function () {
-      // if (sound) {
-      //   sound.stop();
-      //   sound.release();
-      // }
+      if (sound && sound.isPlaying()) {
+        sound.stop();
+        sound.release();
+      }
+      setInterval(undefined);
     };
   }, []);
 
