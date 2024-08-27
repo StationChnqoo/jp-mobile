@@ -1,11 +1,11 @@
 import SafeArea from '@src/components/SafeArea';
 import ToolBar from '@src/components/ToolBar';
 
-import {RouteProp} from '@react-navigation/native';
+import {RouteProp, useFocusEffect} from '@react-navigation/native';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import {useInterval} from 'ahooks';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-sound';
@@ -39,7 +39,6 @@ const CourseDetail: React.FC<MyProps> = props => {
   const [sound, setSound] = useState<Sound>(null);
 
   const onPlayPress = () => {
-    console.log(playing);
     if (playing) {
       setPlaying(false);
       sound.pause();
@@ -104,14 +103,21 @@ const CourseDetail: React.FC<MyProps> = props => {
           });
       }
     })();
+    return function () {};
+  }, []);
+
+  // useFocusEffect(useCallback(() => {}, [sound]));
+
+  useEffect(() => {
     return function () {
-      if (sound && sound.isPlaying()) {
+      console.log('Course detail: ', {sound});
+      if (sound) {
         sound.stop();
         sound.release();
       }
       setInterval(undefined);
     };
-  }, []);
+  }, [sound]);
 
   return (
     <SafeArea isAvoidBottomSpace={true}>

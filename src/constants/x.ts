@@ -66,12 +66,13 @@ const Styles = {
   },
   CARD: <ViewStyle>{
     // iOS 阴影
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 0.618},
+    shadowColor: '#333',
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.1,
-    shadowRadius: 0.618,
+    shadowRadius: 1,
     // Android 阴影
     elevation: 1,
+    backgroundColor: 'white'
   },
 };
 

@@ -15,9 +15,9 @@ interface MyProps {
 
 const Controller: React.FC<MyProps> = props => {
   const {duration, onPlayPress, progress, onSeek, playing, downloading} = props;
-
   const {theme} = useStore();
 
+  // console.log('Controller playing: ', playing);
   return (
     <View style={[styles.view, x.Styles.CARD]}>
       <View style={[x.Styles.rowCenter('space-between')]}>
@@ -52,6 +52,7 @@ const Controller: React.FC<MyProps> = props => {
           activeOpacity={x.Touchable.OPACITY}
           onPress={onPlayPress}>
           <Image
+            key={`${playing}`}
             source={
               playing
                 ? require('@root/assets/play/pause.png')
