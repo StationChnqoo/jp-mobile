@@ -11,10 +11,13 @@ import * as React from 'react';
 
 import Main from './Main';
 import LettersGame from './LettersGame';
+import CourseDetail from './CourseDetail';
+import {Course} from '@src/constants/Types';
 
 export type RootStacksParams = {
   Main: undefined;
   LettersGame: undefined;
+  CourseDetail: {course: Course};
 };
 
 const RootStack = createNativeStackNavigator<RootStacksParams>();
@@ -36,6 +39,11 @@ export default function Stacks() {
         <RootStack.Screen
           name="LettersGame"
           component={LettersGame}
+          options={{freezeOnBlur: true}}
+        />
+        <RootStack.Screen
+          name="CourseDetail"
+          component={CourseDetail}
           options={{freezeOnBlur: true}}
         />
       </RootStack.Navigator>

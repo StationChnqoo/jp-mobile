@@ -5,6 +5,7 @@ import {
   ListRenderItemInfo,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -20,6 +21,7 @@ interface MyProps {
 }
 
 const Courses: React.FC<MyProps> = props => {
+  const {navigation} = props;
   const [courses, setCourses] = useState<Course[]>([]);
   const {theme} = useStore();
 
@@ -35,7 +37,12 @@ const Courses: React.FC<MyProps> = props => {
     const {index, item} = info;
 
     return (
-      <View style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        activeOpacity={x.Touchable.OPACITY}
+        onPress={() => {
+          navigation.navigate('CourseDetail', {course: item});
+        }}>
         <View style={[x.Styles.rowCenter('space-between')]}>
           <Text
             style={{fontSize: x.scale(16), fontWeight: '500', color: '#333'}}>
@@ -68,7 +75,7 @@ const Courses: React.FC<MyProps> = props => {
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (

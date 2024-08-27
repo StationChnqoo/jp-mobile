@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface MyProps {
   children: React.ReactNode;
+  isAvoidBottomSpace?: boolean;
 }
 
 const SafeArea: React.FC<MyProps> = props => {
+  const {children, isAvoidBottomSpace} = props;
   const STATUS_BAR_HEIGHT = Platform.select({
     android: StatusBar.currentHeight,
     ios: useSafeAreaInsets().top,
   });
+  const BOTTOM_SPACE_HEIGHT = useSafeAreaInsets().bottom;
+
   return (
     <View style={{flex: 1}}>
       <View
@@ -21,7 +25,16 @@ const SafeArea: React.FC<MyProps> = props => {
           width: '100%',
         }}
       />
-      {props.children}
+      {children}
+      {isAvoidBottomSpace ? (
+        <View
+          style={{
+            height: BOTTOM_SPACE_HEIGHT,
+            width: '100%',
+            backgroundColor: '#fff',
+          }}
+        />
+      ) : null}
     </View>
   );
 };
