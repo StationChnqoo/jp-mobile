@@ -10,10 +10,11 @@ interface MyProps {
   onSeek: (n: number) => void;
   progress: number;
   playing: boolean;
+  downloading: boolean;
 }
 
 const Controller: React.FC<MyProps> = props => {
-  const {duration, onPlayPress, progress, onSeek, playing} = props;
+  const {duration, onPlayPress, progress, onSeek, playing, downloading} = props;
 
   const {theme} = useStore();
 
@@ -23,9 +24,10 @@ const Controller: React.FC<MyProps> = props => {
         <View style={{flex: 1}}>
           <Slider
             // style={{width: 200, height: 40}}
-            disabled={duration == 0}
+            disabled={duration == 0 || downloading}
             style={{margin: 0, padding: 0}}
             minimumValue={0}
+            value={progress}
             maximumValue={duration}
             minimumTrackTintColor="#999"
             maximumTrackTintColor={theme}
@@ -36,21 +38,23 @@ const Controller: React.FC<MyProps> = props => {
         <View style={[x.Styles.rowCenter('center'), {width: x.scale(90)}]}>
           <Text style={{fontSize: x.scale(12), color: '#333'}}>
             {`${
-              duration
-                ? `${x.Time.HHmmss(progress)} / ${x.Time.HHmmss(duration)}`
-                : '正在加载录音 ...'
+              downloading
+                ? `正在缓存 ${
+                    duration == 0 ? 0 : Math.floor((progress / duration) * 100)
+                  }%`
+                : `${x.Time.HHmmss(progress)} / ${x.Time.HHmmss(duration)}`
             }`}
           </Text>
         </View>
         <View style={{width: 12}} />
         <TouchableOpacity
-          disabled={duration == 0}
+          disabled={duration == 0 || downloading}
           activeOpacity={x.Touchable.OPACITY}
           onPress={onPlayPress}>
           <Image
             source={
               playing
-                ? require('@root/assets/play/pause.png')
+                ? require('@root/assets/play/stop.png')
                 : require('@root/assets/play/start.png')
             }
             style={{

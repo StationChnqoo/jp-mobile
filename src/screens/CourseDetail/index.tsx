@@ -8,8 +8,8 @@ import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import {RootStacksParams, RootStacksProp} from '..';
 import Controller from './components/Controller';
-import Sound from 'react-native-sound';
 import RNFS from 'react-native-fs';
+import Sound from 'react-native-sound';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -23,19 +23,30 @@ const CourseDetail: React.FC<MyProps> = props => {
   const [progress, setProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  var sound: Sound = null;
 
-  // var sound = new Sound(route.params.course.audio, Sound.DOCUMENT, error => {
-  //   if (error) {
-  //     console.log('Sound init faild: ', error);
-  //   }
-  //   setDuration(sound.getDuration());
-  // });
-
-  const onPlayPress = () => {};
+  const onPlayPress = () => {
+    console.log(playing);
+    if (playing) {
+      setPlaying(false);
+      sound?.stop();
+    } else {
+      setPlaying(true);
+      sound?.play();
+    }
+  };
   const onSeek = (n: number) => {};
 
-  // https://www.nhk.or.jp/lesson/zh/mp3/audio_lesson_03.mp3 对
-  // https://www.nhk.or.jp/lesson/zh/mp3/audio_lesson_04.mp3
+  const initSoundSource = (file: string) => {
+    sound = new Sound(file, '', error => {
+      if (error) {
+        console.log('Sound init faild: ', error);
+      }
+      setProgress(0);
+      setDuration(sound.getDuration());
+    });
+  };
+
   useEffect(() => {
     console.log('Source audio: ', route.params.course.audio);
     (async () => {
@@ -44,6 +55,7 @@ const CourseDetail: React.FC<MyProps> = props => {
       let isFile = await RNFS.exists(file);
       if (isFile) {
         console.log(file);
+        initSoundSource(file);
       } else {
         RNFS.downloadFile({
           // headers: {':authority': 'www.nhk.or.jp'},
@@ -56,10 +68,13 @@ const CourseDetail: React.FC<MyProps> = props => {
           },
           progress: result => {
             console.log('Downloading: ', result);
+            setDuration(result.contentLength);
+            setProgress(result.bytesWritten);
           },
         })
           .promise.then(response => {
             setDownloading(false);
+            initSoundSource(file);
             console.log('Downloaded: ', response);
           })
           .catch(error => {
@@ -67,7 +82,12 @@ const CourseDetail: React.FC<MyProps> = props => {
           });
       }
     })();
-    return function () {};
+    return function () {
+      // if (sound) {
+      //   sound.stop();
+      //   sound.release();
+      // }
+    };
   }, []);
 
   return (
@@ -92,6 +112,7 @@ const CourseDetail: React.FC<MyProps> = props => {
             onSeek={onSeek}
             progress={progress}
             playing={playing}
+            downloading={downloading}
           />
         </View>
       </View>
