@@ -15,6 +15,7 @@ import x from '@src/constants/x';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
 import {useStore} from '@src/stores';
+import JPText from '@src/components/JPText';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -23,7 +24,7 @@ interface MyProps {
 const Courses: React.FC<MyProps> = props => {
   const {navigation} = props;
   const [courses, setCourses] = useState<Course[]>([]);
-  const {theme} = useStore();
+  const {theme, font} = useStore();
 
   useEffect(() => {
     (async () => {
@@ -60,9 +61,7 @@ const Courses: React.FC<MyProps> = props => {
           <View style={{width: 10}} />
           <View style={{flex: 1, justifyContent: 'space-between'}}>
             <View>
-              <Text style={{color: '#333', fontSize: x.scale(14)}}>
-                {item.message.jp}
-              </Text>
+              <JPText style={{}}>{item.message.jp}</JPText>
               <View style={{height: 4}} />
               <Text style={{color: '#666', fontSize: x.scale(12)}}>
                 {item.message.cn}

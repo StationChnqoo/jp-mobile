@@ -8,6 +8,8 @@ interface States {
   increase: (by: number) => void;
   theme: string;
   setTheme: (theme: string) => void;
+  font: string;
+  setFont: (font: string) => void;
 }
 
 const useStore = create<States>()(
@@ -18,6 +20,8 @@ const useStore = create<States>()(
         increase: by => set(state => ({bears: state.bears + by})),
         theme: '#987123',
         setTheme: theme => set({theme}),
+        font: x.Fonts.NotoSerifJP,
+        setFont: font => set({font}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -26,6 +30,7 @@ const useStore = create<States>()(
         partialize: state => ({
           bears: state.bears,
           theme: state.theme,
+          font: state.font,
         }),
       },
     ),

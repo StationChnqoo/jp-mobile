@@ -1,3 +1,4 @@
+import JPText from '@src/components/JPText';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React from 'react';
@@ -13,7 +14,7 @@ interface MyProps {
 
 const PreviewPanel: React.FC<MyProps> = props => {
   const {playing, letters, index, onPress} = props;
-  const {theme} = useStore();
+  const {theme, font} = useStore();
 
   return (
     <View
@@ -36,14 +37,13 @@ const PreviewPanel: React.FC<MyProps> = props => {
           onPress={() => {
             onPress(i);
           }}>
-          <Text
+          <JPText
             style={{
               fontSize: x.scale(16),
               color: index == i ? 'white' : '#333',
-              fontWeight: '500',
             }}>
             {it}
-          </Text>
+          </JPText>
         </TouchableOpacity>
       ))}
     </View>

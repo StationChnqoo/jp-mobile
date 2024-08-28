@@ -1,4 +1,5 @@
 import Button from '@src/components/Button';
+import JPText from '@src/components/JPText';
 import {Course} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
@@ -30,13 +31,9 @@ const Cover: React.FC<MyProps> = props => {
         <View>
           <Text style={styles.title}>{course.title}</Text>
           <View style={{height: 5}} />
-          {Object.keys(course.message).map((it, i) => (
-            <View key={i} style={{marginVertical: 4}}>
-              <Text style={styles.message} numberOfLines={1}>
-                {course.message[it]}
-              </Text>
-            </View>
-          ))}
+          <JPText style={styles.message}>{course.message.jp}</JPText>
+          <View style={{height: 5}} />
+          <Text style={styles.message}>{course.message.cn}</Text>
         </View>
         <View style={x.Styles.rowCenter('flex-end')}>
           <Button

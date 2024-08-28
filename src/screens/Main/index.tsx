@@ -1,13 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import {useStore} from '@src/stores';
 import React from 'react';
 import {Image} from 'react-native';
-import Home from '../Home';
-import MarketScreen from '../Courses';
-import {useStore} from '@src/stores';
-import OrdersScreen from '../Orders';
-import MyScreen from '../My';
 import Courses from '../Courses';
+import Home from '../Home';
+import My from '../My';
+import OrdersScreen from '../Orders';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +38,7 @@ function MainScreen() {
     },
     {
       name: 'Me',
-      component: MyScreen,
+      component: My,
       icon: require('./assets/menu_me.png'),
       label: '我的',
     },

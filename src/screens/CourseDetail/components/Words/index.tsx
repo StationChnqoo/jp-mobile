@@ -1,3 +1,4 @@
+import JPText from '@src/components/JPText';
 import {Course, Word} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
@@ -10,7 +11,7 @@ interface MyProps {
 
 const Words: React.FC<MyProps> = props => {
   const {course} = props;
-  const {theme} = useStore();
+  const {theme, font} = useStore();
   const [isShowEN, setIsShowEN] = useState(true);
   const [isShowCN, setIsShowCN] = useState(true);
   const [isShuffle, setIsShuffle] = useState(false);
@@ -55,7 +56,7 @@ const Words: React.FC<MyProps> = props => {
             key={i}
             style={styles.word}
             activeOpacity={x.Touchable.OPACITY}>
-            <Text style={styles.messageJP}>{it.jp}</Text>
+            <JPText style={styles.messageJP}>{it.jp}</JPText>
             {isShowCN && <Text style={styles.messageCN}>{it.cn}</Text>}
             {isShowEN && <Text style={styles.messageEN}>{it.en}</Text>}
           </TouchableOpacity>
@@ -116,9 +117,20 @@ const styles = StyleSheet.create({
     paddingVertical: x.scale(6),
     paddingHorizontal: 10,
   },
-  messageCN: {color: '#666', fontSize: x.scale(12), marginTop: 5},
-  messageEN: {color: '#333', fontSize: x.scale(12), marginTop: 5},
-  messageJP: {fontSize: x.scale(14), color: '#333', fontWeight: '500'},
+  messageCN: {
+    color: '#666',
+    fontSize: x.scale(12),
+    marginTop: 5,
+  },
+  messageEN: {
+    color: '#333',
+    fontSize: x.scale(12),
+    marginTop: 5,
+  },
+  messageJP: {
+    fontSize: x.scale(14),
+    color: '#111',
+  },
   tag: {
     alignItems: 'center',
     justifyContent: 'center',

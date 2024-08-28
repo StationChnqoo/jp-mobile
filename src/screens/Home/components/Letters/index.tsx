@@ -1,4 +1,5 @@
 import Button from '@src/components/Button';
+import JPText from '@src/components/JPText';
 import Services from '@src/constants/Services';
 import {Letter} from '@src/constants/Types';
 
@@ -15,7 +16,7 @@ interface MyProps {
 
 const HomeLetters: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const {theme} = useStore();
+  const {theme, font} = useStore();
   const [letters, setLetters] = useState<Letter[]>([]);
   const [index, setIndex] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);
@@ -34,7 +35,7 @@ const HomeLetters: React.FC<MyProps> = props => {
     })();
     return function () {};
   }, [isShuffle]);
-  
+
   const loadJPLetters = async () => {
     return await new Services().selectJPLetters();
   };
@@ -87,14 +88,12 @@ const HomeLetters: React.FC<MyProps> = props => {
               {it ? (
                 <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
                   {isRecite ? (
-                    <Text
+                    <JPText
                       style={{
-                        fontWeight: '500',
-                        color: '#333',
                         fontSize: x.scale(24),
                       }}>
                       {it.hiragana.letter}
-                    </Text>
+                    </JPText>
                   ) : (
                     <Image
                       source={{uri: it.hiragana.src}}

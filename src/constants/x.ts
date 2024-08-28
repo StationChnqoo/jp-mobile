@@ -1,9 +1,8 @@
 import {
   Dimensions,
   FlexStyle,
-  ImageStyle,
   StyleProp,
-  View,
+  StyleSheet,
   ViewStyle,
 } from 'react-native';
 
@@ -11,6 +10,26 @@ const F = 'F';
 const f = (params: any) => {};
 const HEIGHT = Dimensions.get('screen').height;
 const WIDTH = Dimensions.get('screen').width;
+
+const styles = StyleSheet.create({
+  card: {
+    // iOS 阴影
+    shadowColor: '#333',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    // Android 阴影
+    elevation: 1,
+    backgroundColor: 'white',
+  },
+  fill: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+});
 
 const Touchable = {
   OPACITY: 0.8,
@@ -25,7 +44,8 @@ const scale = (n: number) => {
 };
 
 const Fonts = {
-  DOSIS: 'Dosis',
+  NotoSansJP: 'NotoSansJP-Medium',
+  NotoSerifJP: 'NotoSerifJP-Medium',
 };
 
 const Color = {
@@ -42,13 +62,7 @@ const Time = {
   },
 };
 const Styles = {
-  FILL: <ImageStyle | ViewStyle | any>{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
+  FILL: styles.fill,
   rowCenter: (justifyContent?: FlexStyle['justifyContent']) => {
     return <StyleProp<ViewStyle>>{
       flexDirection: 'row',
@@ -64,16 +78,7 @@ const Styles = {
       backgroundColor,
     };
   },
-  CARD: <ViewStyle>{
-    // iOS 阴影
-    shadowColor: '#333',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    // Android 阴影
-    elevation: 1,
-    backgroundColor: 'white',
-  },
+  CARD: styles.card,
 };
 
 const Links = {

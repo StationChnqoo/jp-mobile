@@ -1,3 +1,4 @@
+import JPText from '@src/components/JPText';
 import {Letter} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
@@ -13,7 +14,7 @@ interface MyProps {
 
 const ClickPanel: React.FC<MyProps> = props => {
   const {playing, onPress, letters} = props;
-  const {theme} = useStore();
+  const {theme, font} = useStore();
   return (
     <View style={styles.view}>
       <Text style={{fontSize: x.scale(16), color: '#333'}}>请选择</Text>
@@ -32,13 +33,13 @@ const ClickPanel: React.FC<MyProps> = props => {
             style={styles.letterBig}
             onPress={() => onPress(it)}>
             {it ? (
-              <Text
+              <JPText
                 style={{
                   fontSize: x.scale(20),
                   color: it.checked ? '#ccc' : '#333',
                 }}>
                 {it.hiragana.letter}
-              </Text>
+              </JPText>
             ) : null}
           </TouchableOpacity>
         ))}

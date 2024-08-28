@@ -3,13 +3,15 @@ import {useStore} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-interface MyProps {}
+interface MyProps {
+  onPress: (s: string) => void;
+}
 
 const Profile: React.FC<MyProps> = props => {
-  const {} = props;
+  const {onPress} = props;
   const menus = [
     {icon: require('../assets/service.png'), name: '客服', value: 'service'},
-    {icon: require('../assets/setting.png'), name: '设置', value: 'setting'},
+    {icon: require('../assets/setting.png'), name: '设置', value: 'settings'},
   ];
   const {theme} = useStore();
   return (
@@ -68,7 +70,9 @@ const Profile: React.FC<MyProps> = props => {
         <View style={x.Styles.rowCenter()}>
           {menus.map((it, i) => (
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={() => {
+                onPress(it.value);
+              }}
               key={i}
               style={{marginLeft: 12}}
               activeOpacity={x.Touchable.OPACITY}>

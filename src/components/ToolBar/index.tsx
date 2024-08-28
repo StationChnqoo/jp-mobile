@@ -27,7 +27,7 @@ const ToolBar: React.FC<MyProps> = props => {
             style={{height: IMAGE_SIZE, width: IMAGE_SIZE, tintColor: '#666'}}
           />
         </TouchableOpacity>
-        <Text style={{fontSize: 16, color: '#333', fontWeight: 'medium'}}>
+        <Text style={{fontSize: x.scale(16), color: '#111', fontWeight: '500'}}>
           {title}
         </Text>
         <View style={{width: IMAGE_SIZE}} />

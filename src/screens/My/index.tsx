@@ -1,21 +1,29 @@
 import React, {useEffect} from 'react';
-import {FlatList, Image, ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
-import MarketItem from '@src/components/MarketItem';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import x from '@src/constants/x';
 import Profile from './components/Profile';
 
 interface MyProps {
   navigation?: RootStacksProp;
 }
 
-const MyScreen: React.FC<MyProps> = props => {
+const My: React.FC<MyProps> = props => {
+  const {navigation} = props;
   useEffect(() => {
     return function () {};
   }, []);
 
+  const onProfilePress = (s: string) => {
+    switch (s) {
+      case 'settings':
+        navigation.navigate('Settings');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <View style={{flex: 1}}>
       <View
@@ -23,12 +31,11 @@ const MyScreen: React.FC<MyProps> = props => {
       />
       <ScrollView>
         <View style={{height: 12}} />
-        {[<Profile />].map((it, i) => (
+        {[<Profile onPress={onProfilePress} />].map((it, i) => (
           <View key={i} style={{marginBottom: 12}}>
             {it}
           </View>
         ))}
-        
       </ScrollView>
     </View>
   );
@@ -36,4 +43,4 @@ const MyScreen: React.FC<MyProps> = props => {
 
 const styles = StyleSheet.create({});
 
-export default MyScreen;
+export default My;

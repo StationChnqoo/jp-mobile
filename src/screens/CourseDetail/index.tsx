@@ -6,13 +6,7 @@ import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import {useInterval} from 'ahooks';
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-sound';
 import {RootStacksParams, RootStacksProp} from '..';
@@ -131,7 +125,7 @@ const CourseDetail: React.FC<MyProps> = props => {
   return (
     <SafeArea isAvoidBottomSpace={true}>
       <ToolBar
-        title={route.params.course.message.jp}
+        title={route.params.course.message.cn}
         onBackPress={() => {
           navigation.goBack();
         }}
