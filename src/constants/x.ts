@@ -13,7 +13,7 @@ const HEIGHT = Dimensions.get('screen').height;
 const WIDTH = Dimensions.get('screen').width;
 
 const Touchable = {
-  OPACITY: 0.9,
+  OPACITY: 0.8,
   hitlop: (n?: number) => {
     let _n = n || 12;
     return {top: _n, bottom: _n, left: _n, right: _n};

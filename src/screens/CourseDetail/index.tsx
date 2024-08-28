@@ -17,6 +17,8 @@ import RNFS from 'react-native-fs';
 import Sound from 'react-native-sound';
 import {RootStacksParams, RootStacksProp} from '..';
 import Controller from './components/Controller';
+import Cover from './components/Cover';
+import Words from './components/Words';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -33,6 +35,7 @@ const CourseDetail: React.FC<MyProps> = props => {
   const [interval, setInterval] = useState<null | undefined | number>(
     undefined,
   );
+  const [controllerSpace, setControllerSpace] = useState(0);
 
   useInterval(() => {
     if (sound && sound.isPlaying()) {
@@ -134,21 +137,33 @@ const CourseDetail: React.FC<MyProps> = props => {
         }}
       />
       <View style={styles.view}>
-        <ScrollView>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Webviewer', {
-                title: route.params.course.message.jp,
-                url: x.Links.previewPdf(route.params.course.pdf),
-              });
-            }}>
-            <Image
-              source={{uri: route.params.course.thumbnails}}
-              style={{width: x.WIDTH, height: (x.WIDTH * 9) / 16}}
-            />
-          </TouchableOpacity>
+        <ScrollView style={{}}>
+          <View style={{flex: 1}}>
+            <View style={{height: 12}} />
+            {[
+              <Cover
+                course={route.params.course}
+                onPdfPreviewPress={() => {
+                  navigation.navigate('Webviewer', {
+                    title: route.params.course.message.jp,
+                    url: x.Links.previewPdf(route.params.course.pdf),
+                  });
+                }}
+              />,
+              <Words course={route.params.course} />,
+            ].map((it, i) => (
+              <View key={i} style={{marginBottom: 12}}>
+                {it}
+              </View>
+            ))}
+          </View>
+          <View style={{height: controllerSpace}} />
         </ScrollView>
-        <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
+        <View
+          style={{position: 'absolute', bottom: 0, width: '100%'}}
+          onLayout={e => {
+            setControllerSpace(e.nativeEvent.layout.height);
+          }}>
           <Controller
             duration={duration}
             onPlayPress={onPlayPress}
