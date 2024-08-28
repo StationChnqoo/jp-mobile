@@ -1,14 +1,7 @@
 import x from '@src/constants/x';
 import {RootStacksProp} from '@src/screens';
 import React from 'react';
-import {
-  Image,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -25,12 +18,7 @@ const ToolBar: React.FC<MyProps> = props => {
       <View style={[styles.views]}>
         <TouchableOpacity
           activeOpacity={0.9}
-          hitSlop={{
-            top: 12,
-            bottom: 12,
-            left: 12,
-            right: 12,
-          }}
+          hitSlop={x.Touchable.hitlop(12)}
           onPress={() => {
             onBackPress?.();
           }}>

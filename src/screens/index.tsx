@@ -13,11 +13,13 @@ import Main from './Main';
 import LettersGame from './LettersGame';
 import CourseDetail from './CourseDetail';
 import {Course} from '@src/constants/Types';
+import Webviewer from './Webviewer';
 
 export type RootStacksParams = {
   Main: undefined;
   LettersGame: undefined;
   CourseDetail: {course: Course};
+  Webviewer: {title: string; url: string};
 };
 
 const RootStack = createNativeStackNavigator<RootStacksParams>();
@@ -44,6 +46,11 @@ export default function Stacks() {
         <RootStack.Screen
           name="CourseDetail"
           component={CourseDetail}
+          options={{freezeOnBlur: true}}
+        />
+        <RootStack.Screen
+          name="Webviewer"
+          component={Webviewer}
           options={{freezeOnBlur: true}}
         />
       </RootStack.Navigator>

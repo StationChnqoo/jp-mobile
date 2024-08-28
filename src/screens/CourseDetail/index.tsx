@@ -1,12 +1,18 @@
 import SafeArea from '@src/components/SafeArea';
 import ToolBar from '@src/components/ToolBar';
 
-import {RouteProp, useFocusEffect} from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import {useInterval} from 'ahooks';
-import React, {useCallback, useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-sound';
 import {RootStacksParams, RootStacksProp} from '..';
@@ -129,10 +135,18 @@ const CourseDetail: React.FC<MyProps> = props => {
       />
       <View style={styles.view}>
         <ScrollView>
-          <Image
-            source={{uri: route.params.course.thumbnails}}
-            style={{width: x.WIDTH, height: (x.WIDTH * 9) / 16}}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Webviewer', {
+                title: route.params.course.message.jp,
+                url: x.Links.previewPdf(route.params.course.pdf),
+              });
+            }}>
+            <Image
+              source={{uri: route.params.course.thumbnails}}
+              style={{width: x.WIDTH, height: (x.WIDTH * 9) / 16}}
+            />
+          </TouchableOpacity>
         </ScrollView>
         <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
           <Controller
@@ -152,7 +166,6 @@ const CourseDetail: React.FC<MyProps> = props => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    paddingVertical: 12,
     backgroundColor: x.Color.PAGE,
     position: 'relative',
   },

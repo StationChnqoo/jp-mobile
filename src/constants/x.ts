@@ -67,13 +67,18 @@ const Styles = {
   CARD: <ViewStyle>{
     // iOS 阴影
     shadowColor: '#333',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
-    shadowRadius: 1,
+    shadowRadius: 2,
     // Android 阴影
     elevation: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
+};
+
+const Links = {
+  previewPdf: (url: string) =>
+    `https://mozilla.github.io/pdf.js/web/viewer.html?file=${url}`,
 };
 
 const x = {
@@ -86,7 +91,8 @@ const x = {
   Fonts,
   Color,
   Styles,
-  Time
+  Time,
+  Links,
 };
 
 export default x;
