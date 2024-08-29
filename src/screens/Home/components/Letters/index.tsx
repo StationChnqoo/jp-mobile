@@ -9,6 +9,7 @@ import {useStore} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import FastImage from 'react-native-fast-image';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -59,14 +60,15 @@ const HomeLetters: React.FC<MyProps> = props => {
           }}>
           五十音图
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           activeOpacity={x.Touchable.OPACITY}
           onPress={() => {}}>
           <Text style={{fontSize: x.scale(14), color: theme}}>练习 →</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={{height: 6}} />
       <View style={{flexDirection: 'row'}}>
+        <View style={{width: 12}} />
         <View
           style={{
             flexDirection: 'row',
@@ -95,15 +97,12 @@ const HomeLetters: React.FC<MyProps> = props => {
                       {it.hiragana.letter}
                     </JPText>
                   ) : (
-                    <Image
+                    <FastImage
                       source={{uri: it.hiragana.src}}
-                      style={[
-                        {
-                          width: x.scale(42),
-                          height: x.scale(49),
-                        },
-                        index == i ? {} : {tintColor: '#666'},
-                      ]}
+                      style={{
+                        width: x.scale(42),
+                        height: x.scale(49),
+                      }}
                     />
                   )}
                 </View>
@@ -114,25 +113,29 @@ const HomeLetters: React.FC<MyProps> = props => {
         <View style={{justifyContent: 'space-between', flex: 4}}>
           <View style={{alignItems: 'center'}}>
             <Text style={{color: '#999'}}>平假名</Text>
-            <Image
-              style={[
-                {
-                  width: x.scale(90),
-                  height: x.scale(90),
-                },
-                isPreview ? {} : {tintColor: '#eee'},
-              ]}
-              source={{uri: letters[index]?.hiragana?.detailSrc}}
-            />
+            {letters?.[index] ? (
+              <Image
+                style={[
+                  {
+                    width: x.scale(90),
+                    height: x.scale(90),
+                  },
+                  isPreview ? {} : {tintColor: '#eee'},
+                ]}
+                source={{uri: letters[index].hiragana.detailSrc}}
+              />
+            ) : null}
             <View style={{height: 12}} />
             <Text style={{color: '#999'}}>片假名</Text>
-            <Image
-              style={[
-                {width: x.scale(90), height: x.scale(90)},
-                isPreview ? {} : {tintColor: '#eee'},
-              ]}
-              source={{uri: letters[index]?.katakana?.detailSrc}}
-            />
+            {letters?.[index] ? (
+              <Image
+                style={[
+                  {width: x.scale(90), height: x.scale(90)},
+                  isPreview ? {} : {tintColor: '#eee'},
+                ]}
+                source={{uri: letters[index].katakana.detailSrc}}
+              />
+            ) : null}
           </View>
 
           <View>
@@ -225,8 +228,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   letterContainer: {
-    width: ((x.WIDTH - 24) * 0.6) / 5,
-    height: (((x.WIDTH - 24) * 0.6) / 5 / 6) * 7,
+    width: ((x.WIDTH - 24 - 12) * 0.6) / 5,
+    height: (((x.WIDTH - 24 - 12) * 0.6) / 5 / 6) * 7,
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 12,

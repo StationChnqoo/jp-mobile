@@ -3,6 +3,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Setting from '../Setting';
 import {useStore} from '@src/stores';
+import JPText from '@src/components/JPText';
 
 interface MyProps {}
 
@@ -24,11 +25,17 @@ const Font: React.FC<MyProps> = props => {
             onPress={() => setFont(it.value)}>
             <Text style={styles.title}>{it.label}</Text>
             <View style={x.Styles.rowCenter('space-between')}>
-              <Text
+              <JPText
                 key={`${i}`}
-                style={[styles.message, {fontFamily: it.value}]}>
+                style={[
+                  styles.message,
+                  {
+                    fontFamily: it.value,
+                    color: font == it.value ? theme : '#666',
+                  },
+                ]}>
                 日本國民は、正義と秩序を基調とする國際平和を誠實に希求し、國權の發動たる戰爭と、武力による威嚇又は武力の行使は、國際紛爭を解決する手段としては、永久にこれを放棄する
-              </Text>
+              </JPText>
               <View style={{width: 12}} />
               <Image
                 source={

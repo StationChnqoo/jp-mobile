@@ -6,6 +6,7 @@ import SafeArea from '@src/components/SafeArea';
 import ToolBar from '@src/components/ToolBar';
 import {RootStacksProp} from '..';
 import Font from './components/Font';
+import Color from './components/Color';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -26,6 +27,7 @@ const Settings: React.FC<MyProps> = props => {
       <ScrollView>
         <View style={{flex: 1}}>
           <Font />
+          <Color />
         </View>
       </ScrollView>
     </SafeArea>

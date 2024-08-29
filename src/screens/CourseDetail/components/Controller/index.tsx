@@ -2,6 +2,7 @@ import Slider from '@react-native-community/slider';
 import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React from 'react';
+import ProgressBar from 'react-native-progress/Bar';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {
@@ -32,9 +33,9 @@ const Controller: React.FC<MyProps> = props => {
             minimumTrackTintColor="#999"
             maximumTrackTintColor={theme}
             onSlidingComplete={onSeek}
+            thumbTintColor={theme}
           />
         </View>
-        <View style={{width: 12}} />
         <View style={[x.Styles.rowCenter('center'), {width: x.scale(90)}]}>
           <Text style={{fontSize: x.scale(12), color: '#333'}}>
             {`${
@@ -78,6 +79,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     marginBottom: 12,
     borderRadius: 32,
+    justifyContent: 'center',
+    height: x.scale(44),
   },
 });
 

@@ -91,7 +91,7 @@ const CourseDetail: React.FC<MyProps> = props => {
             console.log('Downloading: ', result);
           },
           progress: result => {
-            console.log('Downloading: ', result);
+            // console.log('Downloading: ', result);
             setDuration(result.contentLength);
             setProgress(result.bytesWritten);
           },

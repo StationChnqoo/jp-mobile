@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';

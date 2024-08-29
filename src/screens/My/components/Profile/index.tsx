@@ -2,6 +2,7 @@ import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 interface MyProps {
   onPress: (s: string) => void;
@@ -18,7 +19,7 @@ const Profile: React.FC<MyProps> = props => {
     <View style={styles.view}>
       <View style={[x.Styles.rowCenter()]}>
         <View style={{position: 'relative'}}>
-          <Image
+          <FastImage
             source={{uri: 'https://blog.cctv3.net/i.jpg'}}
             style={{
               height: x.scale(48),

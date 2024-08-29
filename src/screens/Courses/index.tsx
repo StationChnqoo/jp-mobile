@@ -16,6 +16,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
 import {useStore} from '@src/stores';
 import JPText from '@src/components/JPText';
+import FastImage from 'react-native-fast-image';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -54,7 +55,7 @@ const Courses: React.FC<MyProps> = props => {
         <View style={{height: 10}} />
 
         <View style={{flexDirection: 'row'}}>
-          <Image
+          <FastImage
             style={{width: x.scale(120), height: x.scale(80), borderRadius: 4}}
             source={{uri: item.thumbnails}}
           />

@@ -5,6 +5,7 @@ import x from '@src/constants/x';
 import {useStore} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 interface MyProps {
   onPdfPreviewPress: () => void;
@@ -18,7 +19,7 @@ const Cover: React.FC<MyProps> = props => {
   // console.log('Controller playing: ', playing);
   return (
     <View style={[styles.view]}>
-      <Image
+      <FastImage
         resizeMode={'cover'}
         source={{uri: course.thumbnails}}
         style={{
