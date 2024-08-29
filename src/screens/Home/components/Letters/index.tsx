@@ -57,6 +57,7 @@ const HomeLetters: React.FC<MyProps> = props => {
           style={{
             fontSize: x.scale(16),
             fontWeight: '500',
+            color: '#333',
           }}>
           五十音图
         </Text>

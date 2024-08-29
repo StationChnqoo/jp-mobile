@@ -7,6 +7,7 @@ import ToolBar from '@src/components/ToolBar';
 import {RootStacksProp} from '..';
 import Font from './components/Font';
 import Color from './components/Color';
+import About from './components/About';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -28,6 +29,7 @@ const Settings: React.FC<MyProps> = props => {
         <View style={{flex: 1}}>
           <Font />
           <Color />
+          <About />
         </View>
       </ScrollView>
     </SafeArea>
