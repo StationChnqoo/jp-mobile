@@ -26,11 +26,15 @@ const ClickPanel: React.FC<MyProps> = props => {
       }
       return _letters;
     };
-    setMyLetters(
-      lettersFormatter(
-        playing ? [...letters].sort(() => Math.random() - 0.5) : [...letters],
-      ),
-    );
+    if (playing) {
+      if (myLetters.length == 0) {
+        setMyLetters(
+          lettersFormatter([...letters].sort(() => Math.random() - 0.5)),
+        );
+      }
+    } else {
+      setMyLetters([]);
+    }
     return function () {};
   }, [playing, letters]);
   return (

@@ -14,14 +14,14 @@ interface MyProps {
   onPlayPress: () => void;
 }
 
+const PREVIEW_CHARS = Array(50).fill('');
+
 const Play: React.FC<MyProps> = props => {
   const {playing, seconds, onPlayPress} = props;
   const {theme} = useCaches();
   const [index, setIndex] = useState(0);
   const [clickLetters, setClickLetters] = useState<Letter[]>([]);
-  const [previewLetters, setPreviewLetters] = useState<string[]>(
-    Array(50).fill(''),
-  );
+  const [previewLetters, setPreviewLetters] = useState<string[]>(PREVIEW_CHARS);
 
   useEffect(() => {
     (async () => {
@@ -77,6 +77,12 @@ const Play: React.FC<MyProps> = props => {
     }
   };
 
+  const resetLetters = () => {
+    let _letters = [...clickLetters].map((it, i) => ({...it, checked: false}));
+    setClickLetters(_letters);
+    setPreviewLetters(PREVIEW_CHARS);
+  };
+
   return (
     <View style={styles.view}>
       <View style={{flexDirection: 'row'}}>
@@ -113,7 +119,10 @@ const Play: React.FC<MyProps> = props => {
                 {backgroundColor: theme},
               ]}
               activeOpacity={x.Touchable.OPACITY}
-              onPress={onPlayPress}>
+              onPress={() => {
+                onPlayPress();
+                resetLetters();
+              }}>
               <Text style={styles.playText}>
                 {playing ? '停止PK' : '开始PK'}
               </Text>
