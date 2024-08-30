@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RNFS from 'react-native-fs';
@@ -8,7 +8,7 @@ import Setting from '../Setting';
 interface MyProps {}
 
 const About: React.FC<MyProps> = props => {
-  const {font, setFont, theme, setTheme} = useStore();
+  const {font, setFont, theme, setTheme} = useCaches();
   const [items, setItems] = useState([]);
 
   useEffect(() => {

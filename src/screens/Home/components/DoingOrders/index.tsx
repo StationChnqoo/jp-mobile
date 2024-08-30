@@ -1,6 +1,6 @@
 import Price from '@src/components/Price';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -9,7 +9,7 @@ interface MyProps {}
 const DoingOrders: React.FC<MyProps> = props => {
   const {} = props;
   const [datas, setDatas] = useState(Array(10).fill(''));
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <View style={styles.view}>
       <View style={x.Styles.rowCenter()}>

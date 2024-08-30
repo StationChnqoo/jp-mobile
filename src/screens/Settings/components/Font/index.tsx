@@ -2,7 +2,7 @@ import x from '@src/constants/x';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Setting from '../Setting';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import JPText from '@src/components/JPText';
 
 interface MyProps {}
@@ -13,7 +13,7 @@ const fonts = [
 ];
 
 const Font: React.FC<MyProps> = props => {
-  const {font, setFont, theme} = useStore();
+  const {font, setFont, theme} = useCaches();
   return (
     <Setting title={'字体设置'}>
       <View style={{}}>

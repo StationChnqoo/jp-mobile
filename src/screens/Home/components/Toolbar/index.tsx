@@ -1,13 +1,7 @@
 import x from '@src/constants/x';
-import { useStore } from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {
   onSearchPress: () => void;
@@ -16,7 +10,7 @@ interface MyProps {
 
 const Toolbar: React.FC<MyProps> = props => {
   const {onSearchPress, onMessagePress} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <View style={[styles.view, x.Styles.CARD]}>
       <View style={styles.viewMain}>

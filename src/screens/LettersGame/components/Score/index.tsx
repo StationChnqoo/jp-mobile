@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -7,7 +7,7 @@ interface MyProps {}
 
 const Score: React.FC<MyProps> = props => {
   const {} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <View style={styles.view}>
       <View style={x.Styles.rowCenter()}>

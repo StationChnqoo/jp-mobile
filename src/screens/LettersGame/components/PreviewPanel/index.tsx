@@ -1,6 +1,6 @@
 import JPText from '@src/components/JPText';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 const SPACE = [36, 38, 46, 48];
@@ -14,7 +14,7 @@ interface MyProps {
 
 const PreviewPanel: React.FC<MyProps> = props => {
   const {playing, letters, index, onPress} = props;
-  const {theme, font} = useStore();
+  const {theme, font} = useCaches();
 
   return (
     <View

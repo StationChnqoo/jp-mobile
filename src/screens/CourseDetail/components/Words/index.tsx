@@ -1,7 +1,7 @@
 import JPText from '@src/components/JPText';
 import {Course, Word} from '@src/constants/Types';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -11,7 +11,7 @@ interface MyProps {
 
 const Words: React.FC<MyProps> = props => {
   const {course} = props;
-  const {theme, font} = useStore();
+  const {theme, font} = useCaches();
   const [isShowEN, setIsShowEN] = useState(true);
   const [isShowCN, setIsShowCN] = useState(true);
   const [isShuffle, setIsShuffle] = useState(false);

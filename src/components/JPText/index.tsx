@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import {StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
 
 interface MyProps {
@@ -8,7 +8,7 @@ interface MyProps {
 }
 
 const JPText = (props: MyProps) => {
-  const {font} = useStore();
+  const {font} = useCaches();
   const {style, children} = props;
   return (
     <Text

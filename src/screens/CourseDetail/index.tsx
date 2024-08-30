@@ -3,7 +3,7 @@ import ToolBar from '@src/components/ToolBar';
 
 import {RouteProp} from '@react-navigation/native';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import {useInterval} from 'ahooks';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
@@ -21,7 +21,7 @@ interface MyProps {
 
 const CourseDetail: React.FC<MyProps> = props => {
   const {navigation, route} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [playing, setPlaying] = useState(false);

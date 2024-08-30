@@ -14,7 +14,7 @@ import {Course} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStacksProp} from '..';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import JPText from '@src/components/JPText';
 import FastImage from 'react-native-fast-image';
 
@@ -25,7 +25,7 @@ interface MyProps {
 const Courses: React.FC<MyProps> = props => {
   const {navigation} = props;
   const [courses, setCourses] = useState<Course[]>([]);
-  const {theme, font} = useStore();
+  const {theme, font} = useCaches();
 
   useEffect(() => {
     (async () => {

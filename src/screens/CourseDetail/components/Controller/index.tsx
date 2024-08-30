@@ -1,6 +1,6 @@
 import Slider from '@react-native-community/slider';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
@@ -16,7 +16,7 @@ interface MyProps {
 
 const Controller: React.FC<MyProps> = props => {
   const {duration, onPlayPress, progress, onSeek, playing, downloading} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
 
   // console.log('Controller playing: ', playing);
   return (

@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -14,7 +14,7 @@ const Profile: React.FC<MyProps> = props => {
     {icon: require('../assets/service.png'), name: '客服', value: 'service'},
     {icon: require('../assets/setting.png'), name: '设置', value: 'settings'},
   ];
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <View style={styles.view}>
       <View style={[x.Styles.rowCenter()]}>

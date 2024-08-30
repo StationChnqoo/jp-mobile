@@ -1,9 +1,8 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useEffect} from 'react';
 import {AppRegistry, Platform, StatusBar, View} from 'react-native';
 import {name as appName} from './app.json';
 import Screens from './src/screens';
-import {useStore} from './src/stores';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useCaches} from './src/stores';
 
 const StoreContext = createContext();
 
@@ -13,7 +12,7 @@ const JP = () => {
   }, []);
 
   return (
-    <StoreContext.Provider value={useStore}>
+    <StoreContext.Provider value={useCaches}>
       <View style={{flex: 1}}>
         <StatusBar
           translucent={true}

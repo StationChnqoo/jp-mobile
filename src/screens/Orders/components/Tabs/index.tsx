@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -10,7 +10,7 @@ interface MyProps {
 
 const Tabs: React.FC<MyProps> = props => {
   const {index, onTabPress} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   const [tabs, setTabs] = useState([
     '全部',
     '待支付',

@@ -2,7 +2,7 @@ import Button from '@src/components/Button';
 import JPText from '@src/components/JPText';
 import {Course} from '@src/constants/Types';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -14,7 +14,7 @@ interface MyProps {
 
 const Cover: React.FC<MyProps> = props => {
   const {onPdfPreviewPress, course} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
 
   // console.log('Controller playing: ', playing);
   return (

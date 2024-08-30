@@ -5,7 +5,7 @@ import {Letter} from '@src/constants/Types';
 
 import x from '@src/constants/x';
 import {RootStacksProp} from '@src/screens';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -17,7 +17,7 @@ interface MyProps {
 
 const HomeLetters: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const {theme, font} = useStore();
+  const {theme, font} = useCaches();
   const [letters, setLetters] = useState<Letter[]>([]);
   const [index, setIndex] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);

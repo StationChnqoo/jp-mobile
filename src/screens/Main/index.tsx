@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {Image} from 'react-native';
 import Courses from '../Courses';
@@ -43,7 +43,7 @@ function MainScreen() {
       label: '我的',
     },
   ];
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <Tab.Navigator>
       {screens.map((it, i) => (

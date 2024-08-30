@@ -1,6 +1,6 @@
 import Button from '@src/components/Button';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Setting from '../Setting';
@@ -8,7 +8,7 @@ import Setting from '../Setting';
 interface MyProps {}
 
 const Color: React.FC<MyProps> = props => {
-  const {font, setFont, theme, setTheme} = useStore();
+  const {font, setFont, theme, setTheme} = useCaches();
   const [colors, setColors] = useState([]);
   const [r, setR] = useState(0);
 

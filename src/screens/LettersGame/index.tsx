@@ -2,7 +2,7 @@ import SafeArea from '@src/components/SafeArea';
 import ToolBar from '@src/components/ToolBar';
 
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {RootStacksProp} from '..';
@@ -16,7 +16,7 @@ interface MyProps {
 
 const LettersGame: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   const [seconds, setSeconds] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [interval, setInterval] = useState<number | null | undefined>(

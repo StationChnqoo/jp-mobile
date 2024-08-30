@@ -1,5 +1,5 @@
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ClickPanel from '../ClickPanel';
@@ -16,7 +16,7 @@ interface MyProps {
 
 const Play: React.FC<MyProps> = props => {
   const {playing, seconds, onPlayPress} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   const [index, setIndex] = useState(0);
   const [clickLetters, setClickLetters] = useState<Letter[]>([]);
   const [previewLetters, setPreviewLetters] = useState<string[]>(

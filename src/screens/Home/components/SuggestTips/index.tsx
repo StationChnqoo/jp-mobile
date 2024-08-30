@@ -1,5 +1,5 @@
 import Button from '@src/components/Button';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -9,7 +9,7 @@ interface MyProps {
 
 const SuggestTips: React.FC<MyProps> = props => {
   const {onClosePress} = props;
-  const {theme} = useStore();
+  const {theme} = useCaches();
   return (
     <View style={styles.view}>
       <TouchableOpacity

@@ -1,7 +1,7 @@
 import JPText from '@src/components/JPText';
 import {Letter} from '@src/constants/Types';
 import x from '@src/constants/x';
-import {useStore} from '@src/stores';
+import {useCaches} from '@src/stores';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -14,7 +14,7 @@ interface MyProps {
 
 const ClickPanel: React.FC<MyProps> = props => {
   const {playing, onPress, letters} = props;
-  const {theme, font} = useStore();
+  const {theme, font} = useCaches();
   return (
     <View style={styles.view}>
       <Text style={{fontSize: x.scale(16), color: '#333'}}>请选择</Text>
