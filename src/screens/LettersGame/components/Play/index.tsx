@@ -26,19 +26,10 @@ const Play: React.FC<MyProps> = props => {
   useEffect(() => {
     (async () => {
       let datas = await loadJPLetters();
-      setClickLetters(lettersFormatter(datas.slice(0, 46)));
+      setClickLetters(datas.slice(0, 46));
     })();
     return function () {};
   }, []);
-
-  const lettersFormatter = (letters: any[]) => {
-    let _letters = [...letters];
-    let space = [36, 38, 46, 48];
-    for (let i = 0; i < space.length; i++) {
-      _letters.splice(space[i], 0, null);
-    }
-    return _letters;
-  };
 
   const loadJPLetters = async () => {
     return await new Services().selectJPLetters();

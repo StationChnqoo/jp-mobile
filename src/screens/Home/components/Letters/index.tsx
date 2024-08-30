@@ -91,12 +91,25 @@ const HomeLetters: React.FC<MyProps> = props => {
               {it ? (
                 <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
                   {isRecite ? (
-                    <JPText
+                    <View
                       style={{
-                        fontSize: x.scale(24),
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
                       }}>
-                      {it.hiragana.letter}
-                    </JPText>
+                      <JPText
+                        style={{
+                          fontSize: x.scale(20),
+                        }}>
+                        {it.hiragana.letter}
+                      </JPText>
+                      <JPText
+                        style={{
+                          color: '#666',
+                          fontSize: x.scale(10),
+                        }}>
+                        {it.katakana.letter}
+                      </JPText>
+                    </View>
                   ) : (
                     <FastImage
                       source={{uri: it.hiragana.src}}
@@ -111,10 +124,11 @@ const HomeLetters: React.FC<MyProps> = props => {
             </TouchableOpacity>
           ))}
         </View>
-        <View style={{justifyContent: 'space-between', flex: 4}}>
-          <View style={{alignItems: 'center'}}>
-            <Text style={{color: '#999'}}>平假名</Text>
-            {letters?.[index] ? (
+        {letters?.[index] ? (
+          <View style={{justifyContent: 'space-between', flex: 4}}>
+            <View style={{alignItems: 'center'}}>
+              <Text style={{color: '#999'}}>平假名</Text>
+
               <Image
                 style={[
                   {
@@ -125,10 +139,10 @@ const HomeLetters: React.FC<MyProps> = props => {
                 ]}
                 source={{uri: letters[index].hiragana.detailSrc}}
               />
-            ) : null}
-            <View style={{height: 12}} />
-            <Text style={{color: '#999'}}>片假名</Text>
-            {letters?.[index] ? (
+
+              <View style={{height: 12}} />
+              <Text style={{color: '#999'}}>片假名</Text>
+
               <Image
                 style={[
                   {width: x.scale(90), height: x.scale(90)},
@@ -136,40 +150,40 @@ const HomeLetters: React.FC<MyProps> = props => {
                 ]}
                 source={{uri: letters[index].katakana.detailSrc}}
               />
-            ) : null}
-          </View>
+            </View>
 
-          <View>
-            <Line
-              theme={theme}
-              isChecked={isShuffle}
-              title={'打乱顺序'}
-              onPress={() => setIsShuffle(!isShuffle)}
-            />
-            <View style={{height: 12}} />
-            <Line
-              theme={theme}
-              isChecked={isRecite}
-              title={'背诵模式'}
-              onPress={() => setIsRecite(!isRecite)}
-            />
-            <View style={{height: 12}} />
-            <Line
-              theme={theme}
-              isChecked={isPreview}
-              title={'开启预览'}
-              onPress={() => setIsPreview(!isPreview)}
-            />
-            <View style={{height: 12}} />
-            <FillButton
-              title={'默写大PK'}
-              onPress={() => {
-                navigation.navigate('LettersGame');
-              }}
-              theme={theme}
-            />
+            <View>
+              <Line
+                theme={theme}
+                isChecked={isShuffle}
+                title={'打乱顺序'}
+                onPress={() => setIsShuffle(!isShuffle)}
+              />
+              <View style={{height: 12}} />
+              <Line
+                theme={theme}
+                isChecked={isRecite}
+                title={'背诵模式'}
+                onPress={() => setIsRecite(!isRecite)}
+              />
+              <View style={{height: 12}} />
+              <Line
+                theme={theme}
+                isChecked={isPreview}
+                title={'开启预览'}
+                onPress={() => setIsPreview(!isPreview)}
+              />
+              <View style={{height: 12}} />
+              <FillButton
+                title={'默写大PK'}
+                onPress={() => {
+                  navigation.navigate('LettersGame');
+                }}
+                theme={theme}
+              />
+            </View>
           </View>
-        </View>
+        ) : null}
       </View>
     </View>
   );

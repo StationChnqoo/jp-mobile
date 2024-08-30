@@ -2,7 +2,7 @@ import JPText from '@src/components/JPText';
 import {Letter} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {
@@ -15,6 +15,24 @@ interface MyProps {
 const ClickPanel: React.FC<MyProps> = props => {
   const {playing, onPress, letters} = props;
   const {theme, font} = useCaches();
+  const [myLetters, setMyLetters] = useState<Letter[]>([]);
+
+  useEffect(() => {
+    const lettersFormatter = (letters: any[]) => {
+      let _letters = [...letters];
+      let space = [36, 38, 46, 48];
+      for (let i = 0; i < space.length; i++) {
+        _letters.splice(space[i], 0, null);
+      }
+      return _letters;
+    };
+    setMyLetters(
+      lettersFormatter(
+        playing ? [...letters].sort(() => Math.random() - 0.5) : [...letters],
+      ),
+    );
+    return function () {};
+  }, [playing, letters]);
   return (
     <View style={styles.view}>
       <Text style={{fontSize: x.scale(16), color: '#333'}}>请选择</Text>
@@ -25,7 +43,7 @@ const ClickPanel: React.FC<MyProps> = props => {
           flexWrap: 'wrap',
           justifyContent: 'space-between',
         }}>
-        {letters.map((it, i) => (
+        {myLetters.map((it, i) => (
           <TouchableOpacity
             disabled={it ? it?.checked : true}
             activeOpacity={x.Touchable.OPACITY}
