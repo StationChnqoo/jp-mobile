@@ -22,7 +22,7 @@ const Color: React.FC<MyProps> = props => {
   }, [r]);
 
   return (
-    <Setting title={'主题设置'}>
+    <Setting title={'主题'}>
       <View style={{height: 6}} />
       <View style={x.Styles.rowCenter()}>
         <View style={x.Styles.rowCenter()}>

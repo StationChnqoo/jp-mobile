@@ -15,7 +15,7 @@ const Banner: React.FC<MyProps> = props => {
       />
       <View style={[x.Styles.FILL, styles.viewMain]}>
         <View>
-          <Text style={styles.textTitle}>重新定义货运布局</Text>
+          <Text style={styles.textTitle}>学日语的大旗谁来扛</Text>
           <View style={{height: 10}} />
           <Text style={styles.textMessage}>重新定义货运布局，认准货趴窝</Text>
         </View>

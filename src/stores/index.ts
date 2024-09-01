@@ -15,6 +15,8 @@ interface States {
   setLetters: (letters: Letter[]) => void;
   courses: Course[];
   setCourses: (courses: Course[]) => void;
+  pdfMode: number;
+  setPdfMode: (mode: number) => void;
 }
 
 const useCaches = create<States>()(
@@ -31,6 +33,8 @@ const useCaches = create<States>()(
         setLetters: letters => set({letters}),
         courses: [],
         setCourses: courses => set({courses}),
+        pdfMode: 0,
+        setPdfMode: pdfMode => set({pdfMode}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -42,6 +46,7 @@ const useCaches = create<States>()(
           font: state.font,
           letters: state.letters,
           courses: state.courses,
+          pdfMode: state.pdfMode,
         }),
       },
     ),

@@ -21,7 +21,7 @@ interface MyProps {
 
 const CourseDetail: React.FC<MyProps> = props => {
   const {navigation, route} = props;
-  const {theme} = useCaches();
+  const {pdfMode} = useCaches();
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -109,6 +109,19 @@ const CourseDetail: React.FC<MyProps> = props => {
     return function () {};
   }, []);
 
+  const onPdfPreviewPress = () => {
+    if (pdfMode == 0) {
+      navigation.navigate('PdfViewer', {
+        title: route.params.course.message.jp,
+        url: route.params.course.pdf,
+      });
+    } else if (pdfMode == 1) {
+      navigation.navigate('Webviewer', {
+        title: route.params.course.message.jp,
+        url: x.Links.previewPdf(route.params.course.pdf),
+      });
+    }
+  };
   // useFocusEffect(useCallback(() => {}, [sound]));
 
   useEffect(() => {
@@ -137,12 +150,7 @@ const CourseDetail: React.FC<MyProps> = props => {
             {[
               <Cover
                 course={route.params.course}
-                onPdfPreviewPress={() => {
-                  navigation.navigate('Webviewer', {
-                    title: route.params.course.message.jp,
-                    url: x.Links.previewPdf(route.params.course.pdf),
-                  });
-                }}
+                onPdfPreviewPress={onPdfPreviewPress}
               />,
               <Words course={route.params.course} />,
             ].map((it, i) => (

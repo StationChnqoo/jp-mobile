@@ -1,11 +1,10 @@
+import {Letter} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ClickPanel from '../ClickPanel';
 import PreviewPanel from '../PreviewPanel';
-import {Letter} from '@src/constants/Types';
-import Services from '@src/constants/Services';
 const SPACE = [36, 38, 46, 48];
 
 interface MyProps {
@@ -18,22 +17,16 @@ const PREVIEW_CHARS = Array(50).fill('');
 
 const Play: React.FC<MyProps> = props => {
   const {playing, seconds, onPlayPress} = props;
-  const {theme} = useCaches();
+  const {theme, letters} = useCaches();
   const [index, setIndex] = useState(0);
   const [clickLetters, setClickLetters] = useState<Letter[]>([]);
   const [previewLetters, setPreviewLetters] = useState<string[]>(PREVIEW_CHARS);
 
   useEffect(() => {
-    (async () => {
-      let datas = await loadJPLetters();
-      setClickLetters(datas.slice(0, 46));
-    })();
+    let datas = [...letters];
+    setClickLetters(datas.slice(0, 46));
     return function () {};
   }, []);
-
-  const loadJPLetters = async () => {
-    return await new Services().selectJPLetters();
-  };
 
   const onSmallLetterPress = (i: number) => {
     if (playing) {

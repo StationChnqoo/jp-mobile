@@ -14,7 +14,11 @@ const IMAGE_SIZE = 16;
 const ToolBar: React.FC<MyProps> = props => {
   const {title, onBackPress} = props;
   return (
-    <View style={x.Styles.CARD}>
+    <View
+      style={[
+        {paddingHorizontal: 12, justifyContent: 'center', height: x.scale(44)},
+        x.Styles.CARD,
+      ]}>
       <View style={[styles.views]}>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -41,10 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     display: 'flex',
-    paddingHorizontal: 12,
     justifyContent: 'space-between',
-    height: 44,
-    backgroundColor: '#fff',
   },
 });
 

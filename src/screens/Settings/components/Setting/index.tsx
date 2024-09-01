@@ -14,6 +14,7 @@ const Setting: React.FC<MyProps> = props => {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>{title}</Text>
+      <View style={{height: 4}} />
       {children}
     </View>
   );
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     marginVertical: 6,
   },
   text: {
-    fontSize: x.scale(16),
+    fontSize: x.scale(18),
     fontWeight: '500',
     color: '#333',
   },

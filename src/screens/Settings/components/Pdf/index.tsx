@@ -7,46 +7,38 @@ import JPText from '@src/components/JPText';
 
 interface MyProps {}
 
-const fonts = [
-  {label: '印刷体', value: x.Fonts.NotoSansJP},
-  {label: '手写体', value: x.Fonts.NotoSerifJP},
+const modes = [
+  {title: '本地模式', message: '稳定、功能简单、数据缓存在本地'},
+  {title: '远程模式', message: '不稳定、功能丰富、预览服务搭建在国外'},
 ];
 
-const Font: React.FC<MyProps> = props => {
-  const {font, setFont, theme} = useCaches();
+const Pdf: React.FC<MyProps> = props => {
+  const {font, setPdfMode, pdfMode, theme} = useCaches();
   return (
-    <Setting title={'字体'}>
+    <Setting title={'Pdf预览'}>
       <View style={{}}>
-        {fonts.map((it, i) => (
+        {modes.map((it, i) => (
           <TouchableOpacity
             key={i}
             style={{marginTop: 6}}
             activeOpacity={x.Touchable.OPACITY}
-            onPress={() => setFont(it.value)}>
-            <Text style={styles.title}>{it.label}</Text>
+            onPress={() => setPdfMode(i)}>
+            <Text style={styles.title}>{it.title}</Text>
             <View style={x.Styles.rowCenter('space-between')}>
-              <JPText
-                key={`${i}`}
-                style={[
-                  styles.message,
-                  {
-                    fontFamily: it.value,
-                    color: font == it.value ? theme : '#666',
-                  },
-                ]}>
-                日本國民は、正義と秩序を基調とする國際平和を誠實に希求し、國權の發動たる戰爭と、武力による威嚇又は武力の行使は、國際紛爭を解決する手段としては、永久にこれを放棄する
-              </JPText>
+              <Text key={`${i}`} style={[styles.message]}>
+                {it.message}
+              </Text>
               <View style={{width: 12}} />
               <Image
                 source={
-                  font == it.value
+                  i == pdfMode
                     ? require('@root/assets/common/radio_checked.png')
                     : require('@root/assets/common/radio_unchecked.png')
                 }
                 style={{
                   height: x.scale(20),
                   width: x.scale(20),
-                  tintColor: font == it.value ? theme : '#999',
+                  tintColor: i == pdfMode ? theme : '#999',
                 }}
               />
             </View>
@@ -70,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Font;
+export default Pdf;

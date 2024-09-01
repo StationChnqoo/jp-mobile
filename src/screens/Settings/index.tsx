@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
-import MarketItem from '@src/components/MarketItem';
 import SafeArea from '@src/components/SafeArea';
 import ToolBar from '@src/components/ToolBar';
 import {RootStacksProp} from '..';
-import Font from './components/Font';
-import Color from './components/Color';
 import About from './components/About';
+import Color from './components/Color';
+import Font from './components/Font';
+import Pdf from './components/Pdf';
 
 interface MyProps {
   navigation?: RootStacksProp;
@@ -29,6 +29,7 @@ const Settings: React.FC<MyProps> = props => {
         <View style={{flex: 1}}>
           <Font />
           <Color />
+          <Pdf />
           <About />
         </View>
       </ScrollView>

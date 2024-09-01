@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     // Android 阴影
-    elevation: 1,
+    elevation: 2,
     backgroundColor: 'white',
+    zIndex: 1,
   },
   fill: {
     position: 'absolute',

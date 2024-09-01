@@ -16,12 +16,14 @@ import {Course} from '@src/constants/Types';
 import Webviewer from './Webviewer';
 import Settings from './Settings';
 import Welcome from './Welcome';
+import PdfViewer from './PdfViewer';
 
 export type RootStacksParams = {
   Main: undefined;
   LettersGame: undefined;
   CourseDetail: {course: Course};
   Webviewer: {title: string; url: string};
+  PdfViewer: {title: string; url: string};
   Settings: undefined;
   Welcome: undefined;
 };
@@ -64,6 +66,11 @@ export default function Stacks() {
         <RootStack.Screen
           name="Webviewer"
           component={Webviewer}
+          options={{freezeOnBlur: true}}
+        />
+         <RootStack.Screen
+          name="PdfViewer"
+          component={PdfViewer}
           options={{freezeOnBlur: true}}
         />
         <RootStack.Screen

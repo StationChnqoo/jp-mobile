@@ -1,6 +1,5 @@
 import Button from '@src/components/Button';
 import JPText from '@src/components/JPText';
-import Services from '@src/constants/Services';
 import {Letter} from '@src/constants/Types';
 
 import x from '@src/constants/x';
@@ -17,29 +16,23 @@ interface MyProps {
 
 const HomeLetters: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const {theme, font} = useCaches();
-  const [letters, setLetters] = useState<Letter[]>([]);
+  const {theme, font, letters} = useCaches();
+  const [myLetters, setMyLetters] = useState<Letter[]>([]);
   const [index, setIndex] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isPreview, setIsPreview] = useState(true);
   const [isRecite, setIsRecite] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      setIndex(0);
-      let datas: Letter[] = await loadJPLetters();
-      let initLetters = lettersFormatter(datas.slice(0, 46));
-      let shuffleLetters = lettersFormatter(
-        [...datas.slice(0, 46)].sort((a, b) => Math.random() - 0.5),
-      );
-      setLetters(isShuffle ? shuffleLetters : initLetters);
-    })();
+    setIndex(0);
+    let datas: Letter[] = [...letters];
+    let initLetters = lettersFormatter(datas.slice(0, 46));
+    let shuffleLetters = lettersFormatter(
+      [...datas.slice(0, 46)].sort((a, b) => Math.random() - 0.5),
+    );
+    setMyLetters(isShuffle ? shuffleLetters : initLetters);
     return function () {};
   }, [isShuffle]);
-
-  const loadJPLetters = async () => {
-    return await new Services().selectJPLetters();
-  };
 
   const lettersFormatter = (letters: any[]) => {
     let _letters = [...letters];
@@ -61,126 +54,132 @@ const HomeLetters: React.FC<MyProps> = props => {
           }}>
           五十音图
         </Text>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           activeOpacity={x.Touchable.OPACITY}
-          onPress={() => {}}>
+          onPress={() => {
+            navigation.navigate('LettersGame');
+          }}>
           <Text style={{fontSize: x.scale(14), color: theme}}>练习 →</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
       <View style={{height: 6}} />
       <View style={{flexDirection: 'row'}}>
-        <View style={{width: 12}} />
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            flex: 1,
-          }}>
-          {letters.map((it, i) => (
-            <TouchableOpacity
-              activeOpacity={x.Touchable.OPACITY}
-              key={i}
-              style={[
-                styles.letterContainer,
-                {
-                  borderColor: index == i ? theme : 'white',
-                },
-              ]}
-              onPress={() => setIndex(it == null ? index : i)}>
-              {it ? (
-                <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-                  {isRecite ? (
-                    <View
-                      style={{
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                      }}>
-                      <JPText
-                        style={{
-                          fontSize: x.scale(20),
-                        }}>
-                        {it.hiragana.letter}
-                      </JPText>
-                      <JPText
-                        style={{
-                          color: '#666',
-                          fontSize: x.scale(10),
-                        }}>
-                        {it.katakana.letter}
-                      </JPText>
-                    </View>
-                  ) : (
-                    <FastImage
-                      source={{uri: it.hiragana.src}}
-                      style={{
-                        width: x.scale(42),
-                        height: x.scale(49),
-                      }}
-                    />
-                  )}
-                </View>
-              ) : null}
-            </TouchableOpacity>
-          ))}
-        </View>
-        {letters?.[index] ? (
-          <View style={{justifyContent: 'space-between', width: x.scale(120)}}>
-            <View style={{alignItems: 'center'}}>
-              <Text style={{color: '#999'}}>平假名</Text>
-
-              <Image
+        <View style={[x.Styles.rowCenter('center'), {width: '100%'}]}>
+          <View
+            style={{
+              flexDirection: 'column',
+              flexWrap: 'wrap-reverse',
+              height: x.scale(35 * 5) + 4 * 5, // 高度设置为适合你的屏幕
+              alignItems: 'flex-end', // 使得列从右向左排列
+            }}>
+            {myLetters.map((it, i) => (
+              <TouchableOpacity
+                activeOpacity={x.Touchable.OPACITY}
+                key={i}
                 style={[
+                  styles.letterContainer,
                   {
-                    width: x.scale(90),
-                    height: x.scale(90),
+                    borderColor: index == i ? theme : 'white',
                   },
-                  isPreview ? {} : {tintColor: '#eee'},
                 ]}
-                source={{uri: letters[index].hiragana.detailSrc}}
-              />
-
-              <View style={{height: 12}} />
-              <Text style={{color: '#999'}}>片假名</Text>
-
-              <Image
-                style={[
-                  {width: x.scale(90), height: x.scale(90)},
-                  isPreview ? {} : {tintColor: '#eee'},
-                ]}
-                source={{uri: letters[index].katakana.detailSrc}}
-              />
-            </View>
-
-            <View>
-              <Line
-                theme={theme}
-                isChecked={isShuffle}
-                title={'打乱顺序'}
-                onPress={() => setIsShuffle(!isShuffle)}
-              />
-              <View style={{height: 12}} />
-              <Line
-                theme={theme}
-                isChecked={isRecite}
-                title={'背诵模式'}
-                onPress={() => setIsRecite(!isRecite)}
-              />
-              <View style={{height: 12}} />
-              <Line
-                theme={theme}
-                isChecked={isPreview}
-                title={'开启预览'}
-                onPress={() => setIsPreview(!isPreview)}
-              />
-              <View style={{height: 12}} />
-              <FillButton
+                onPress={() => setIndex(it == null ? index : i)}>
+                {it ? (
+                  <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+                    {isRecite ? (
+                      <View
+                        style={{
+                          alignItems: 'center',
+                          justifyContent: 'space-around',
+                        }}>
+                        <JPText
+                          style={{
+                            fontSize: x.scale(18),
+                          }}>
+                          {it.hiragana.letter}
+                        </JPText>
+                        <JPText
+                          style={{
+                            color: '#666',
+                            fontSize: x.scale(10),
+                          }}>
+                          {it.katakana.letter}
+                        </JPText>
+                      </View>
+                    ) : (
+                      <FastImage
+                        source={{uri: it.hiragana.src}}
+                        style={{
+                          width: x.scale(30),
+                          height: x.scale(35),
+                        }}
+                      />
+                    )}
+                  </View>
+                ) : null}
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </View>
+      <View style={{height: 12}} />
+      <View>
+        {myLetters?.[index] ? (
+          <View style={{justifyContent: 'space-between'}}>
+            <View style={[x.Styles.rowCenter('space-between')]}>
+              <View style={[x.Styles.rowCenter()]}>
+                <View style={{alignItems: 'center'}}>
+                  <Text style={{color: '#999'}}>平假名</Text>
+                  <Image
+                    style={[
+                      {
+                        width: x.scale(90),
+                        height: x.scale(90),
+                      },
+                      isPreview ? {} : {tintColor: '#eee'},
+                    ]}
+                    source={{uri: myLetters[index].hiragana.detailSrc}}
+                  />
+                </View>
+                <View style={{alignItems: 'center'}}>
+                  <Text style={{color: '#999'}}>片假名</Text>
+                  <Image
+                    style={[
+                      {width: x.scale(90), height: x.scale(90)},
+                      isPreview ? {} : {tintColor: '#eee'},
+                    ]}
+                    source={{uri: myLetters[index].katakana.detailSrc}}
+                  />
+                </View>
+              </View>
+              <View>
+                <Line
+                  theme={theme}
+                  isChecked={isShuffle}
+                  title={'打乱顺序'}
+                  onPress={() => setIsShuffle(!isShuffle)}
+                />
+                <View style={{height: 12}} />
+                <Line
+                  theme={theme}
+                  isChecked={isRecite}
+                  title={'背诵模式'}
+                  onPress={() => setIsRecite(!isRecite)}
+                />
+                <View style={{height: 12}} />
+                <Line
+                  theme={theme}
+                  isChecked={isPreview}
+                  title={'开启预览'}
+                  onPress={() => setIsPreview(!isPreview)}
+                />
+                {/* <FillButton
                 title={'默写大PK'}
                 onPress={() => {
                   navigation.navigate('LettersGame');
                 }}
                 theme={theme}
-              />
+              /> */}
+              </View>
             </View>
           </View>
         ) : null}
@@ -223,6 +222,7 @@ const Line = (props: LineProps) => {
     <View
       style={[x.Styles.rowCenter('space-between'), {paddingHorizontal: 12}]}>
       <Text style={{color: '#333', fontSize: x.scale(14)}}>{title}</Text>
+      <View style={{width: 12}} />
       <BouncyCheckbox
         size={x.scale(24)}
         disableText={true}
@@ -243,12 +243,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   letterContainer: {
-    width: (x.WIDTH - 12 * 4 - x.scale(120)) / 5 - 2,
-    height: ((x.WIDTH - 12 * 4 - x.scale(120)) / 5 / 6) * 7,
+    width: x.scale(30),
+    height: x.scale(35),
+    marginHorizontal: 2,
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: 6,
     justifyContent: 'center',
+    marginVertical: 2,
   },
 });
 

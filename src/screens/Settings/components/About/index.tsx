@@ -66,7 +66,8 @@ const About: React.FC<MyProps> = props => {
       <View>
         {items.map((it, i) => (
           <View key={i} style={{marginTop: 6}}>
-            <Text style={{color: '#333', fontSize: x.scale(16)}}>
+            <Text
+              style={{color: '#333', fontSize: x.scale(16), fontWeight: '500'}}>
               {it.label}
             </Text>
             <View style={{height: 4}} />
