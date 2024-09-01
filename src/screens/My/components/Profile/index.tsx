@@ -11,8 +11,8 @@ interface MyProps {
 const Profile: React.FC<MyProps> = props => {
   const {onPress} = props;
   const menus = [
-    {icon: require('../assets/service.png'), name: '客服', value: 'service'},
-    {icon: require('../assets/setting.png'), name: '设置', value: 'settings'},
+    {icon: require('../../assets/service.png'), name: '客服', value: 'service'},
+    {icon: require('../../assets/setting.png'), name: '设置', value: 'settings'},
   ];
   const {theme} = useCaches();
   return (
@@ -46,7 +46,7 @@ const Profile: React.FC<MyProps> = props => {
               <Text style={styles.name}>陈桥驿站</Text>
               <View style={{width: 4}} />
               <Image
-                source={require('../assets/id.png')}
+                source={require('../../assets/id.png')}
                 style={[styles.imageId, {tintColor: '#fbca26'}]}
               />
             </View>

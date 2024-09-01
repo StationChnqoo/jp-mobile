@@ -75,7 +75,7 @@ const HomeLetters: React.FC<MyProps> = props => {
             flexDirection: 'row',
             flexWrap: 'wrap',
             justifyContent: 'space-between',
-            flex: 6,
+            flex: 1,
           }}>
           {letters.map((it, i) => (
             <TouchableOpacity
@@ -125,7 +125,7 @@ const HomeLetters: React.FC<MyProps> = props => {
           ))}
         </View>
         {letters?.[index] ? (
-          <View style={{justifyContent: 'space-between', flex: 4}}>
+          <View style={{justifyContent: 'space-between', width: x.scale(120)}}>
             <View style={{alignItems: 'center'}}>
               <Text style={{color: '#999'}}>平假名</Text>
 
@@ -243,8 +243,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   letterContainer: {
-    width: ((x.WIDTH - 24 - 12) * 0.6) / 5,
-    height: (((x.WIDTH - 24 - 12) * 0.6) / 5 / 6) * 7,
+    width: (x.WIDTH - 12 * 4 - x.scale(120)) / 5 - 2,
+    height: ((x.WIDTH - 12 * 4 - x.scale(120)) / 5 / 6) * 7,
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 12,

@@ -23,7 +23,7 @@ const SuggestTips: React.FC<MyProps> = props => {
       </TouchableOpacity>
       <View style={{width: 8}} />
       <Image
-        source={require('../assets/suggest.png')}
+        source={require('../../assets/suggest.png')}
         style={styles.imageIcon}
       />
       <View style={{width: 8}} />

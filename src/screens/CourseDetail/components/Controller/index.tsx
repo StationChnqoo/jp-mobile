@@ -2,7 +2,6 @@ import Slider from '@react-native-community/slider';
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
 import React from 'react';
-import ProgressBar from 'react-native-progress/Bar';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyProps {

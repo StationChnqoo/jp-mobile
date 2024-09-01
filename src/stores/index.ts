@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Course, Letter} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {create} from 'zustand';
 import {createJSONStorage, devtools, persist} from 'zustand/middleware';
@@ -10,6 +11,10 @@ interface States {
   setTheme: (theme: string) => void;
   font: string;
   setFont: (font: string) => void;
+  letters: Letter[];
+  setLetters: (letters: Letter[]) => void;
+  courses: Course[];
+  setCourses: (courses: Course[]) => void;
 }
 
 const useCaches = create<States>()(
@@ -22,6 +27,10 @@ const useCaches = create<States>()(
         setTheme: theme => set({theme}),
         font: x.Fonts.NotoSerifJP,
         setFont: font => set({font}),
+        letters: [],
+        setLetters: letters => set({letters}),
+        courses: [],
+        setCourses: courses => set({courses}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -31,6 +40,8 @@ const useCaches = create<States>()(
           bears: state.bears,
           theme: state.theme,
           font: state.font,
+          letters: state.letters,
+          courses: state.courses,
         }),
       },
     ),

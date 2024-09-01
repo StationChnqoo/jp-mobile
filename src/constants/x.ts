@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
+import RNFS from 'react-native-fs';
 
 const F = 'F';
 const f = (params: any) => {};
@@ -50,6 +51,21 @@ const Fonts = {
 
 const Color = {
   PAGE: '#f0f0f0',
+};
+
+const Files = {
+  /**
+   * 完整的文件绝对路径
+   * @param file
+   * @returns
+   */
+  async readLines(file: string) {
+    let result = '';
+    if (await RNFS.exists(file)) {
+      result = await RNFS.readFile(file);
+    }
+    return '';
+  },
 };
 
 const Time = {
@@ -262,6 +278,7 @@ const x = {
   Time,
   Links,
   COLORS,
+  Files,
 };
 
 export default x;

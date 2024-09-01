@@ -83,7 +83,7 @@ const CheckedTag = (props: CheckedTagProps) => {
       onPress={onPress}>
       <Text style={[{color, fontSize: x.scale(12)}]}>{label}</Text>
       <Image
-        source={require('../assets/checked.png')}
+        source={require('../../assets/checked.png')}
         style={[
           styles.checkedIcon,
           {

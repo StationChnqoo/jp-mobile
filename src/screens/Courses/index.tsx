@@ -24,20 +24,10 @@ interface MyProps {
 
 const Courses: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const [courses, setCourses] = useState<Course[]>([]);
-  const {theme, font} = useCaches();
-
-  useEffect(() => {
-    (async () => {
-      let result = await new Services().selectJPCourses();
-      setCourses([...result]);
-    })();
-    return function () {};
-  }, []);
-
+  const {theme, font, courses} = useCaches();
+  
   const renderItem = (info: ListRenderItemInfo<Course>) => {
     const {index, item} = info;
-
     return (
       <TouchableOpacity
         style={styles.item}
@@ -53,7 +43,6 @@ const Courses: React.FC<MyProps> = props => {
           <Text style={{fontSize: x.scale(16), color: theme}}>#{item.id}</Text>
         </View>
         <View style={{height: 10}} />
-
         <View style={{flexDirection: 'row'}}>
           <FastImage
             style={{width: x.scale(120), height: x.scale(80), borderRadius: 4}}

@@ -9,7 +9,7 @@ const Banner: React.FC<MyProps> = props => {
   return (
     <View style={styles.view}>
       <Image
-        source={require('../assets/demoBanner.jpg')}
+        source={require('../../assets/demoBanner.jpg')}
         style={[x.Styles.FILL, styles.imageBG]}
         resizeMode={'stretch'}
       />
@@ -28,7 +28,7 @@ const Banner: React.FC<MyProps> = props => {
             activeOpacity={x.Touchable.OPACITY}
             onPress={() => {}}>
             <Image
-              source={require('../assets/more.png')}
+              source={require('../../assets/more.png')}
               style={{
                 height: x.scale(14),
                 width: x.scale(14),
