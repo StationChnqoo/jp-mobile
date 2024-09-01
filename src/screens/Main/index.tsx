@@ -6,7 +6,7 @@ import {Image} from 'react-native';
 import Courses from '../Courses';
 import Home from '../Home';
 import My from '../My';
-import OrdersScreen from '../Orders';
+import Words from '../Words';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +26,7 @@ function MainScreen() {
     },
     {
       name: 'Words',
-      component: OrdersScreen,
+      component: Words,
       icon: require('./assets/menu_translate.png'),
       label: '单词',
     },

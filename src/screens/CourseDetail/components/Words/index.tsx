@@ -1,5 +1,5 @@
 import JPText from '@src/components/JPText';
-import {Course, Word} from '@src/constants/Types';
+import {Course, CourseWord, Word} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {useCaches} from '@src/stores';
 import React, {useEffect, useState} from 'react';
@@ -15,7 +15,7 @@ const Words: React.FC<MyProps> = props => {
   const [isShowEN, setIsShowEN] = useState(true);
   const [isShowCN, setIsShowCN] = useState(true);
   const [isShuffle, setIsShuffle] = useState(false);
-  const [words, setWords] = useState<Word[]>([]);
+  const [words, setWords] = useState<CourseWord[]>([]);
 
   useEffect(() => {
     setWords(

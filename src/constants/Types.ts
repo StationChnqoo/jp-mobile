@@ -16,15 +16,15 @@ export interface LetterSrc {
 export interface Course {
   id: number;
   title: String;
-  message: Word;
+  message: CourseWord;
   thumbnails: string;
   web: string;
   audio: string;
   pdf: string;
-  words: Word[];
+  words: CourseWord[];
 }
 
-export interface Word {
+export interface CourseWord {
   cn?: string;
   jp?: string;
   en?: string;

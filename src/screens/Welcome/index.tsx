@@ -15,15 +15,16 @@ interface MyProps {
 
 const Welcome: React.FC<MyProps> = props => {
   const {navigation} = props;
-  const {theme, setCourses, setLetters} = useCaches();
+  const {theme, setCourses, setLetters, setWords} = useCaches();
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState(0);
   const [progress, setProgress] = useState(0);
+
   const [downloadTasks, setDownloadTasks] = useState([
     {
       key: 'letters',
       name: 'letters.json',
-      title: '五十音图资源文件',
+      title: '五十音图资源',
       message: '',
       src: 'https://cloud.cctv3.net/jp-mobile/letters.json',
       hash: '',
@@ -31,9 +32,18 @@ const Welcome: React.FC<MyProps> = props => {
     {
       key: 'courses',
       name: 'courses.json',
-      title: 'NHK课程资源文件',
+      title: 'NHK课程资源',
       message: '',
-      src: 'https://cloud.cctv3.net/jp-mobile/course.json',
+      src: 'https://cloud.cctv3.net/jp-mobile/courses.json',
+      hash: '',
+    },
+    {
+      key: 'words',
+      name: 'words.json',
+      title: '《日语词汇手册》',
+      message:
+        '上海市教育考试院：https://www.shmeea.edu.cn/download/20211206/04.pdf',
+      src: 'https://cloud.cctv3.net/jp-mobile/words.json',
       hash: '',
     },
   ]);
@@ -48,6 +58,8 @@ const Welcome: React.FC<MyProps> = props => {
       case 'courses':
         setCourses(datas);
         break;
+      case 'words':
+        setWords(datas);
       default:
         break;
     }

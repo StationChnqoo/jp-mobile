@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Course, Letter} from '@src/constants/Types';
+import {Course, Letter, Word} from '@src/constants/Types';
 import x from '@src/constants/x';
 import {create} from 'zustand';
 import {createJSONStorage, devtools, persist} from 'zustand/middleware';
@@ -17,6 +17,8 @@ interface States {
   setCourses: (courses: Course[]) => void;
   pdfMode: number;
   setPdfMode: (mode: number) => void;
+  words: Word[];
+  setWords: (words: Word[]) => void;
 }
 
 const useCaches = create<States>()(
@@ -35,6 +37,8 @@ const useCaches = create<States>()(
         setCourses: courses => set({courses}),
         pdfMode: 0,
         setPdfMode: pdfMode => set({pdfMode}),
+        words: [],
+        setWords: words => set({words}),
       }),
       {
         storage: createJSONStorage(() => AsyncStorage),
@@ -47,6 +51,7 @@ const useCaches = create<States>()(
           letters: state.letters,
           courses: state.courses,
           pdfMode: state.pdfMode,
+          words: state.words,
         }),
       },
     ),
