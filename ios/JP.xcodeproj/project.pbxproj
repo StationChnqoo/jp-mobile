@@ -17,6 +17,7 @@
 		7699B88040F8A987B510C191 /* libPods-JP-JPTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-JP-JPTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C5DDEC28B192489798AB5A21 /* NotoSansJP-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D96507427924C01938C1708 /* NotoSansJP-Medium.ttf */; };
+		D8F147DD2C86253D003F9134 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8F147DC2C86253D003F9134 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,13 +45,14 @@
 		3B4392A12AC88292D35C810B /* Pods-JP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JP.debug.xcconfig"; path = "Target Support Files/Pods-JP/Pods-JP.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-JP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JP.release.xcconfig"; path = "Target Support Files/Pods-JP/Pods-JP.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-JP-JPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JP-JPTests.debug.xcconfig"; path = "Target Support Files/Pods-JP-JPTests/Pods-JP-JPTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5D96507427924C01938C1708 /* NotoSansJP-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansJP-Medium.ttf"; path = "../assets/fonts/NotoSansJP-Medium.ttf"; sourceTree = "<group>"; };
+		5D96507427924C01938C1708 /* NotoSansJP-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansJP-Medium.ttf"; path = "../assets/fonts/NotoSansJP-Medium.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-JP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = JP/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-JP-JPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JP-JPTests.release.xcconfig"; path = "Target Support Files/Pods-JP-JPTests/Pods-JP-JPTests.release.xcconfig"; sourceTree = "<group>"; };
-		B8B391ADA63145D39C3B70AE /* NotoSerifJP-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSerifJP-Medium.ttf"; path = "../assets/fonts/NotoSerifJP-Medium.ttf"; sourceTree = "<group>"; };
+		B8B391ADA63145D39C3B70AE /* NotoSerifJP-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSerifJP-Medium.ttf"; path = "../assets/fonts/NotoSerifJP-Medium.ttf"; sourceTree = "<group>"; };
+		D8F147DC2C86253D003F9134 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FDB320EC3539AECB1513A011 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = JP/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		FDB320EC3539AECB1513A011 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = JP/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D8F147DC2C86253D003F9134 /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* JP */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* JPTests */,
@@ -165,7 +168,6 @@
 				B8B391ADA63145D39C3B70AE /* NotoSerifJP-Medium.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +267,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3542B2F90702F9536588CD5C /* PrivacyInfo.xcprivacy in Resources */,
 				C5DDEC28B192489798AB5A21 /* NotoSansJP-Medium.ttf in Resources */,
+				D8F147DD2C86253D003F9134 /* Config.xcconfig in Resources */,
 				516C0671AC8345589698F2AE /* NotoSerifJP-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,10 +610,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -682,10 +682,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
