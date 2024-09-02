@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RNFS from 'react-native-fs';
 import Setting from '../Setting';
+import Config from 'react-native-config';
 
 interface MyProps {}
 
@@ -18,6 +19,10 @@ const About: React.FC<MyProps> = props => {
         {
           label: '缓存空间',
           value: await formartUseCached(),
+        },
+        {
+          label: 'PACKAGE NAME',
+          value: Config.APP_PACKAGE_NAME,
         },
       ]);
     })();
