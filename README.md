@@ -7,7 +7,7 @@
 #### Android 打包
 
 ```bash
-ENVFILE=.env.staging && cd ./android && ./gradlew assembleDebug && cd ..
+cd android && ENVFILE=.env.staging ./gradlew assembleDebug && cd ..
 ENVFILE=.env.rc ./gradlew assembleRelease
 ```
 
